@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // 1. Importe o hook
+import { useNavigate } from "react-router-dom"; 
 import { PartyPopper } from 'lucide-react';
 import AuthModal from "../authenticationpage/AuthModal"; 
 import "./Result.css";
 
 export default function Result() {
   const [modalMode, setModalMode] = useState<"login" | "signup" | null>(null);
-  const navigate = useNavigate(); // 2. Inicialize o navigate
+  const navigate = useNavigate(); 
 
   const openModal = (mode: "login" | "signup") => {
     setModalMode(mode);
@@ -20,10 +20,9 @@ export default function Result() {
     setModalMode(mode);
   };
 
-  // 3. Função que será chamada após o login/cadastro com sucesso
   const handleAuthSuccess = () => {
     closeModal();
-    navigate("/dash"); // Redireciona para a dashboard
+    navigate("/dash"); 
   };
 
   return (
@@ -56,7 +55,7 @@ export default function Result() {
           mode={modalMode}
           onClose={closeModal}
           onSwitchMode={switchModalMode}
-          onSuccess={handleAuthSuccess} // 4. Passe a função para o modal
+          onSuccess={handleAuthSuccess} 
         />
       )}
     </div>
