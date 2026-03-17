@@ -1,5 +1,6 @@
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import {Crosshair, Zap, Rocket, Target} from "lucide-react"
 import styles from "../styles/Home.module.css";
 import { Link } from "react-router-dom";
 
@@ -53,15 +54,15 @@ export default function Home() {
         {/* Features */}
         <div className={styles.features}>
           <div className={styles.featureItem}>
-            <div className="text-2xl">🎯</div>
+            <div className="text-2xl"><Target size={18} color="black" /></div>
             Personalizado
           </div>
           <div className={styles.featureItem}>
-            <div className="text-2xl">⚡</div>
+            <div className="text-2xl"><Zap size={18} color="black" /></div>
             Rápido
           </div>
           <div className={styles.featureItem}>
-            <div className="text-2xl">🚀</div>
+            <div className="text-2xl"><Rocket size={18} color="black" /></div>
             Eficaz
           </div>
         </div>

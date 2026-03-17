@@ -14,14 +14,12 @@ const questions: Question[] = [
 ];
 
 export default function Quiz() {
-
   const navigate = useNavigate();
 
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
 
   const handleAnswer = (value: number) => {
-
     const newAnswers = [...answers];
     newAnswers[current] = value;
     setAnswers(newAnswers);
@@ -34,7 +32,6 @@ export default function Quiz() {
   };
 
   const handleBack = () => {
-
     if (current === 0) {
       navigate("/");
       return;
@@ -51,7 +48,6 @@ export default function Quiz() {
 
       <div className="background-overlay">
         <div className="quiz-container">
-
           {/* voltar */}
           <button className="back-arrow" onClick={handleBack}>
             ←
@@ -64,8 +60,7 @@ export default function Quiz() {
           <h2 className="question">{question.text}</h2>
 
           <div className="options">
-            {[1,2,3,4,5].map((num) => {
-
+            {[1, 2, 3, 4, 5].map((num) => {
               const selected = answers[current] === num;
 
               return (
@@ -79,13 +74,10 @@ export default function Quiz() {
               );
             })}
           </div>
-
           <div className="labels">
-            <span>Não me identifico</span>
-            <span>Pouco me identifico</span>
-            <span>Parcialmente</span>
-            <span>Me identifico</span>
-            <span>Super me identifico</span>
+            <p>Nada</p>
+            <p>Parcialmente</p>
+            <p>Muito</p>
           </div>
 
           {/* progress bar */}
@@ -94,12 +86,11 @@ export default function Quiz() {
               <div
                 className="progress-fill"
                 style={{
-                  width: `${((current + 1) / questions.length) * 100}%`
+                  width: `${((current + 1) / questions.length) * 100}%`,
                 }}
               />
             </div>
           </div>
-
         </div>
       </div>
     </>

@@ -88,12 +88,13 @@
 
 /* labels das respostas */
 .labels {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   max-width: 420px;
   margin-top: 15px;
   font-size: 20px;
+  gap: 90px;
   color: #000;
   text-align: center;
 }
