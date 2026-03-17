@@ -1,0 +1,154 @@
+.dash-page-wrapper {
+  background-color: #faf9f6; 
+  min-height: 100vh;
+  padding-bottom: 90px;
+  color: #1a1a1a;
+  font-family: sans-serif;
+}
+
+.dash-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.dash-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e4e2;
+  padding: 12px 0;
+  margin-bottom: 30px;
+}
+
+.dash-topbar-inner {
+  display: flex;
+  align-items: center;
+}
+
+.dash-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #111;
+}
+
+.dash-app-name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.dash-welcome {
+  margin-bottom: 24px;
+}
+
+.dash-title {
+  font-size: 22px;
+  margin: 0 0 4px 0;
+}
+
+.dash-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .dash-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dash-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #e5e4e2;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-icon-box {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.dash-blue { background: #eff6ff; }
+.dash-yellow { background: #fffbeb; }
+
+.dash-card-title {
+  font-size: 17px;
+  margin: 0 0 8px 0;
+}
+
+.dash-card-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.dash-btn-offwhite {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  background: linear-gradient(to bottom, #ffffff, #f7f7f7);
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+}
+
+.dash-btn-offwhite:hover {
+  background: #f2f2f2;
+  border-color: #bcbcbc;
+  transform: translateY(-1px);
+}
+
+.dash-btn-offwhite:active {
+  background: #ececec;
+  transform: translateY(0);
+}
+
+.dash-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 25px;
+  border-top: 1px solid #eee;
+  z-index: 100;
+}
+
+.dash-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.dash-active {
+  color: #2563eb;
+}

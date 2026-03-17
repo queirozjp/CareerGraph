@@ -1,7 +1,7 @@
-import { Button } from "../components/Button";
+import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import {Crosshair, Zap, Rocket, Target} from "lucide-react"
-import styles from "../styles/Home.module.css";
+import { Zap, Rocket, Target} from "lucide-react"
+import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 
 
@@ -16,8 +16,6 @@ export default function Home() {
     
     <div className={styles.container}>
       <div className={styles.content}>
-
-        {/* Logo */}
         <div className={styles.logo}>
           <svg
             width="64"
@@ -39,7 +37,6 @@ export default function Home() {
           Descubra cursos personalizados para impulsionar sua carreira em tecnologia
         </p>
 
-        {/* CTA Button */}
         <div className={styles.cta}>
           <Link to="/quiz">
           <Button onClick={handleStart} className={styles.ctaButton}>
@@ -51,7 +48,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Features */}
         <div className={styles.features}>
           <div className={styles.featureItem}>
             <div className="text-2xl"><Target size={18} color="black" /></div>

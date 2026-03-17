@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Quiz.css";
-import GraphBackground from "../components/GraphBackground";
+import "./Quiz.css";
+import GraphBackground from "../../components/GraphBackground";
 
 type Question = {
   id: number;
@@ -13,6 +13,13 @@ const questions: Question[] = [
   { id: 2, text: "Prefiro trabalhar com tecnologia do que com pessoas" },
 ];
 
+const options = [
+  { value: 1, label: "Não me identifico" },
+  { value: 2, label: "Pouco me identifico" },
+  { value: 3, label: "Parcialmente me identifico" },
+  { value: 4, label: "Me identifico" },
+  { value: 5, label: "Super me identifico" },
+];
 export default function Quiz() {
   const navigate = useNavigate();
 
@@ -60,24 +67,20 @@ export default function Quiz() {
           <h2 className="question">{question.text}</h2>
 
           <div className="options">
-            {[1, 2, 3, 4, 5].map((num) => {
-              const selected = answers[current] === num;
+            {options.map((opt) => {
+  const selected = answers[current] === opt.value;
 
-              return (
-                <button
-                  key={num}
-                  className={`option-btn ${selected ? "selected" : ""}`}
-                  onClick={() => handleAnswer(num)}
-                >
-                  {num}
-                </button>
-              );
-            })}
-          </div>
-          <div className="labels">
-            <p>Nada</p>
-            <p>Parcialmente</p>
-            <p>Muito</p>
+  return (
+    <button
+      key={opt.value}
+      className={`option-btn ${selected ? "selected" : ""}`}
+      onClick={() => handleAnswer(opt.value)}
+    >
+      <span>{opt.label}</span>
+      <div className="option-number">{opt.value}</div>
+    </button>
+  );
+})}
           </div>
 
           {/* progress bar */}
