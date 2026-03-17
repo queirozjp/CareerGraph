@@ -4,9 +4,10 @@ type AuthModalProps = {
   mode: "login" | "signup";
   onClose: () => void;
   onSwitchMode: (mode: "login" | "signup") => void;
+  onSuccess: () => void; 
 };
 
-export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProps) {
+export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: AuthModalProps) { // 2. Receba aqui
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -21,12 +22,15 @@ export default function AuthModal({ mode, onClose, onSwitchMode }: AuthModalProp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+
     if (mode === "signup") {
-      alert(`Cadastrar com: Nome=${name}, Email=${email}`);
+      console.log(`Cadastrar: ${name}`);
     } else {
-      alert(`Login com: Email=${email}`);
+      console.log(`Login: ${email}`);
     }
-    // Aqui pode chamar API, etc.
+
+    onSuccess(); 
   };
 
   return (

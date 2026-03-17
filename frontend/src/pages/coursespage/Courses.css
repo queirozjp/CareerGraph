@@ -170,3 +170,16 @@
   background: #f2f2f2;
   border-color: #bcbcbc;
 }
+.dash-nav-item {
+  text-decoration: none; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.dash-nav-item.dash-active {
+  color: #2563eb; 
+}

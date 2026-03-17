@@ -1,6 +1,7 @@
 import React from "react";
 import "./Courses.css";
 import { Search, Clock, ChevronRight,  Home, BookOpen, FileText, User } from "lucide-react";
+import { NavLink } from 'react-router-dom';
 
 const Courses: React.FC = () => {
   return (
@@ -74,10 +75,21 @@ const Courses: React.FC = () => {
         </div>
       </main>
       <nav className="dash-bottom-nav">
-        <div className="dash-nav-item"><Home size={20}/> <span>Home</span></div>
-        <div className="dash-nav-item dash-active"><BookOpen size={20}/> <span>Cursos</span></div>
-        <div className="dash-nav-item"><FileText size={20}/> <span>Tutoriais</span></div>
-        <div className="dash-nav-item"><User size={20}/> <span>Perfil</span></div>
+        <NavLink to="/dash" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
+          <Home size={20}/> <span>Home</span>
+        </NavLink>
+    
+        <NavLink to="/courses" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
+          <BookOpen size={20}/> <span>Cursos</span>
+        </NavLink>
+    
+        <NavLink to="/tutorial" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
+          <FileText size={20}/> <span>Tutoriais</span>
+        </NavLink>
+    
+        <NavLink to="/profile" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
+          <User size={20}/> <span>Perfil</span>
+        </NavLink>
       </nav>
     </div>
   );

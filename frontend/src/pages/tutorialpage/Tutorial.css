@@ -1,0 +1,173 @@
+.tut-page-wrapper {
+  background-color: #faf9f6;
+  min-height: 100vh;
+  padding-bottom: 100px;
+  color: #1a1a1a;
+  font-family: 'Inter', sans-serif;
+}
+
+.tut-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.tut-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e4e2;
+  padding: 12px 0;
+  margin-bottom: 24px;
+}
+
+.tut-topbar-inner {
+  display: flex;
+  align-items: center;
+}
+
+.tut-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #111;
+}
+
+.tut-app-name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.tut-main-title {
+  font-size: 24px;
+  margin: 10px 0 24px 0;
+}
+
+.tut-section {
+  margin-bottom: 32px;
+}
+
+.tut-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.tut-section-header h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #003366; 
+}
+
+.tut-icon-blue {
+  color: #2563eb;
+}
+
+.tut-card {
+  background: #ffffff;
+  border: 1px solid #e5e4e2;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.tut-card-title {
+  font-size: 16px;
+  margin: 0 0 8px 0;
+}
+
+.tut-card-text {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.tut-tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tut-tag {
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  border: 1px solid #d1d1d1;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #555;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.tut-card-links {
+  background: #ffffff;
+  border: 1px solid #e5e4e2;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.tut-intro-text {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.tut-link-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.tut-link-item:hover {
+  background: #f8f8f8;
+  border-color: #d1d1d1;
+}
+
+.tut-link-icon {
+  color: #666;
+  padding-top: 2px;
+}
+
+.tut-link-title {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.tut-link-desc {
+  font-size: 13px;
+  color: #888;
+}
+
+.tut-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 25px;
+  border-top: 1px solid #eee;
+}
+
+.dash-nav-item {
+  text-decoration: none; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.dash-nav-item.dash-active {
+  color: #2563eb; 
+}

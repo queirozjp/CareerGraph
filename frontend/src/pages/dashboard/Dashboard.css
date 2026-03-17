@@ -141,14 +141,15 @@
 }
 
 .dash-nav-item {
+  text-decoration: none; 
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #999;
   gap: 4px;
-  font-size: 11px;
+  cursor: pointer;
 }
 
-.dash-active {
-  color: #2563eb;
+.dash-nav-item.dash-active {
+  color: #2563eb; 
 }
