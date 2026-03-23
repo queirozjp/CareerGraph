@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./Quiz.css";
 import GraphBackground from "../../components/GraphBackground";
 
+
+
 type Question = {
   id: number;
   text: string;
@@ -31,6 +33,7 @@ const options = [
 
 export default function Quiz() {
   const navigate = useNavigate();
+  const [paused, setPaused] = useState(false);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
 
@@ -42,11 +45,11 @@ export default function Quiz() {
     if (current === questions.length - 1) {
       setTimeout(() => {
         navigate("/login");
-      }, 500); 
+      }, 500);
     } else {
 
       setTimeout(() => {
-        setCurrent(current + 1);
+        setCurrent((prev) => prev + 1);
       }, 350);
     }
   };
@@ -63,12 +66,18 @@ export default function Quiz() {
 
   return (
     <>
-      <GraphBackground />
+      <GraphBackground paused={paused} />
 
       <div className="background-overlay">
         <div className="quiz-container">
           <button className="back-arrow" onClick={handleBack}>
             ←
+          </button>
+          <button
+            className="toggle-animation"
+            onClick={() => setPaused(!paused)}
+          >
+            {paused ? "Ativar animação" : "Desativar animação"}
           </button>
 
           <h3>

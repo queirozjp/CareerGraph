@@ -35,6 +35,7 @@ const Dashboard: React.FC = () => {
             <h3 className="dash-card-title">Refazer Questionário</h3>
             <p className="dash-card-text">Atualize suas preferências e obtenha novas recomendações personalizadas.</p>
             <button className="dash-btn-offwhite">
+              
               Começar quiz <ChevronRight size={16} />
             </button>
           </div>
