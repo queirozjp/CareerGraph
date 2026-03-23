@@ -1,9 +1,14 @@
-package com.microwaves.careergraph.entities;
+package com.microwaves.careergraph.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "students")
+
+@Getter
+@Setter
 public class Student {
 
     @Id
