@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 
-export default function GraphBackground() {
+type Props = {
+  paused?: boolean;
+};
+export default function GraphBackground({ paused = false }: Props) {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -42,7 +45,7 @@ export default function GraphBackground() {
             opacity: 0.4
           },
           move: {
-            enable: true,
+            enable: !paused,
             speed: 1
           },
           size: {

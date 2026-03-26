@@ -5,8 +5,9 @@ import Quiz from "../quizpage/Quiz";
 import Result from "../resultpage/Result";
 import Dashboard from "../dashboard/Dashboard";
 import Courses from "../coursespage/Courses";
-import Tutorial from "../tutorialpage/tutorial";
+import Tutorial from "../tutorialpage/Tutorial";
 import Profile from "../profilepage/Profile";
+
 
 const router = createBrowserRouter([
   {
