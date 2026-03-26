@@ -1,4 +1,4 @@
-package com.microwaves.careergraph.Model;
+package com.microwaves.careergraph.Service;
 
 public class RecommendationEngine {
 
