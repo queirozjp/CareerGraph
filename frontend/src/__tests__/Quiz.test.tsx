@@ -81,7 +81,7 @@ describe("Quiz Component", () => {
         <Quiz />
       </MemoryRouter>
     );
-
+    //teste
     const toggleButton = screen.getByText("Desativar animação");
 
     // Click to pause
