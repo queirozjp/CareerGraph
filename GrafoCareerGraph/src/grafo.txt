@@ -1,0 +1,299 @@
+n
+0 "ARQUITETURA DE DADOS"
+1 "BANCO DE DADOS"
+2 "BANCO DE DADOS E ARMAZENAMENTO DE BIG DATA"
+3 "CIBERSEGURANÇA"
+4 "COMPUTAÇÃO EM NUVEM"
+5 "DEFESA CIBERNÉTICA"
+6 "DESENVOLVIMENTO DE BANCO DE DADOS"
+7 "DESENVOLVIMENTO DE SOFTWARE"
+8 "DESENVOLVIMENTO DE SOFTWARE PARA COMÉRCIO ELETRÔNICO"
+9 "DESENVOLVIMENTO FULL STACK"
+10 "DESENVOLVIMENTO MOBILE"
+11 "ENGENHARIA DE SOFTWARE"
+12 "GESTÃO DA SEGURANÇA E DEFESA CIBERNÉTICA"
+13 "GESTÃO DA TECNOLOGIA DA INFORMAÇÃO"
+14 "GESTÃO DE AMBIENTES INTERNET E REDES DE COMPUTADORES"
+15 "GESTÃO DE INTERNET E REDES DE COMPUTADORES"
+16 "GESTÃO DE REDES DE COMPUTADORES E INTERNET"
+17 "INTERNET DAS COISAS"
+18 "PRODUÇÃO DE SOFTWARE"
+19 "PROGRAMAÇÃO DE SISTEMAS"
+20 "REDES DE COMPUTADORES"
+21 "SEGURANÇA CIBERNÉTICA"
+22 "MBA EM AGROTECH LEADERSHIP: Tecnologia, Liderança & Sustentabilidade no Agronegócio"
+23 "AI Scientist"
+24 "ANÁLISE E PROJETO DE SOFTWARE"
+25 "Desenvolvimento em Aplicações WEB"
+26 "Desenvolvimento Mobile com Ênfase em Flutter"
+27 "Desenvolvimento Mobile com Ênfase em Ionic"
+28 "Desenvolvimento Mobile com Ênfase em React"
+29 "Desenvolvimento Mobile com Ênfase em Xamarin"
+30 "Desenvolvimento Mobile e IOT"
+31 "Desenvolvimento WEB Full Stack"
+32 "Desenvolvimento Web Back-End"
+33 "Desenvolvimento Web Front-End"
+34 "Desenvolvimento Web Mobile"
+35 "Desenvolvimento Web com Ênfase em Angular"
+36 "Desenvolvimento Web com Ênfase em MDL"
+37 "Desenvolvimento Web com Ênfase em PHP"
+38 "Desenvolvimento Web com Ênfase em Python"
+39 "Desenvolvimento Full Stack Web, DevOps aplicados a Produto e Inteligência Artificial"
+40 "Desenvolvimento Full Stack e IOT"
+41 "Desenvolvimento Java e Dot Net"
+42 "Data Science e Analytics Aplicado a Finanças"
+43 "Data Science e Big Data Aplicados à Indústria"
+44 "DESENVOLVIMENTO DE SISTEMAS"
+45 "DESENVOLVIMENTO DE SOFTWARE COM METODOLOGIA ÁGIL"
+46 "DESENVOLVIMENTO DE SOFTWARE COM METODOLOGIAS ÁGEIS"
+47 "DESENVOLVIMENTO DE GAMES"
+48 "DESENVOLVEDOR DE JOGOS"
+49 "DESENVOLVIMENTO AVANÇADO EM GO"
+50 "DESENVOLVIMENTO DE APLICAÇÕES CORPORATIVAS JAVA"
+51 "Criptografia Digital com Ênfase em Blockchain"
+52 "Criptografia, Assinatura Digital e Documento Eletrônico"
+53 "Criptografia, Assinatura Eletrônica e Documento Digital"
+54 "Curso de Especialização em Big Data & Analytics"
+55 "Ciências de Dados e Big Data com Ênfase em Docência do Ensino Superior"
+56 "Cloud & AI DevOps"
+57 "Cloud Services com Ênfase em Google Engine"
+58 "Cloud Services com Ênfase em Kubernetes"
+59 "Cloud Services com Ênfase em Microsoft Azure"
+60 "COMPUTAÇÃO QUÂNTICA"
+61 "Arquitetura da Informação e experiência do usuário"
+62 "Arquitetura da Informação: Design de Interação Digital"
+63 "Arquitetura de Computação em Nuvem"
+64 "Arquitetura de Redes e Cloud Computing"
+65 "Arquitetura de Sistemas"
+66 "Arquitetura de Software"
+67 "Arquitetura e Gestão de Infraestrutura em TI"
+68 "Administração de Serviços LINUX"
+69 "Agile Project Management"
+70 "Agile Project Management & Business Agility"
+71 "Algorítimos e Lógica de Programação"
+72 "Análise de Dados e Inteligência Artificial"
+73 "Análise de Dados e Matemática Aplicada"
+74 "Desenvolvimento de Games com Ênfase em Unity"
+75 "Desenvolvimento de Games com Ênfase em Unreal"
+76 "Desenvolvimento de Games e Aplicativos Móveis"
+77 "Aprendizado de Máquina (Machine Learning)"
+78 "Cibersegurança: Governança e Gestão"
+79 "Ciência de Dados com Ênfase em Blockchain"
+80 "Ciência de Dados e Inteligência Artificial"
+81 "Ciência de Dados e Saúde Digital"
+82 "Ciência de Dados para Humanidades"
+83 "CATEGORIA_CLOUD"
+84 "CATEGORIA_DATA"
+85 "CATEGORIA_DESENVOLVIMENTO"
+86 "CATEGORIA_SEGURANCA"
+87 "CATEGORIA_GESTAO"
+88 "CATEGORIA_IA"
+89 "CATEGORIA_DESIGN"
+90 "CATEGORIA_INFRA"
+91 "CATEGORIA_AGRO"
+m
+0 84
+0 2
+0 1
+1 84
+1 6
+1 2
+1 32
+2 84
+2 6
+2 54
+2 72
+3 21
+3 86
+3 78
+3 5
+4 63
+4 17
+4 56
+4 83
+5 21
+5 86
+6 84
+6 32
+7 44
+7 19
+7 18
+7 85
+7 71
+7 11
+7 24
+8 70
+8 85
+8 31
+9 39
+9 85
+9 40
+9 41
+9 31
+10 28
+10 34
+10 27
+10 85
+10 26
+10 71
+10 29
+10 61
+10 30
+11 44
+11 85
+11 24
+11 66
+11 69
+12 21
+12 86
+12 78
+13 78
+13 87
+13 22
+13 67
+14 15
+14 20
+14 87
+14 16
+15 87
+15 16
+16 20
+16 87
+17 90
+17 22
+17 40
+17 30
+18 45
+18 85
+19 85
+19 68
+20 64
+20 90
+20 68
+21 86
+22 91
+23 39
+23 77
+23 88
+24 44
+24 85
+24 66
+24 69
+25 37
+25 36
+25 35
+25 85
+25 71
+25 38
+25 61
+25 33
+25 32
+25 31
+26 85
+27 85
+28 85
+28 61
+29 85
+30 85
+30 40
+31 37
+31 85
+31 41
+31 56
+31 33
+31 32
+32 85
+33 85
+33 62
+33 61
+34 85
+34 61
+35 85
+35 61
+36 85
+37 85
+38 85
+39 85
+39 80
+39 56
+40 85
+41 85
+42 84
+42 43
+42 51
+42 54
+42 72
+42 73
+43 84
+43 54
+44 85
+45 46
+45 85
+45 69
+46 85
+46 69
+47 74
+47 85
+47 76
+47 75
+47 48
+48 85
+48 76
+49 85
+50 85
+51 86
+51 52
+51 79
+51 60
+52 86
+52 53
+53 86
+54 84
+54 55
+55 84
+56 57
+56 83
+57 68
+57 58
+57 83
+58 59
+58 68
+58 83
+59 83
+60 73
+61 89
+61 62
+62 89
+62 76
+63 66
+63 83
+64 90
+64 67
+65 90
+66 85
+67 87
+68 90
+69 70
+69 87
+70 87
+71 85
+72 84
+72 77
+72 73
+72 80
+73 82
+73 84
+74 85
+74 75
+75 85
+76 85
+77 80
+77 88
+78 86
+79 84
+79 80
+80 84
+80 81
+81 82
+81 84
+82 84
