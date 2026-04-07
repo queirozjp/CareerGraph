@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 import Quiz from '../pages/quizpage/Quiz';
 
 // 1. Mock the useNavigate hook from react-router-dom
