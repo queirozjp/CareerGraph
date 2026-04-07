@@ -81,7 +81,7 @@ describe("Quiz Component", () => {
     );
 
     const backButton = screen.getAllByText("←");
-    fireEvent.click(backButton);
+    fireEvent.click(backButton[0]);
 
     // Verify navigate was called with the root path
     expect(mockNavigate).toHaveBeenCalledWith("/");
