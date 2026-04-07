@@ -1,20 +1,27 @@
+import { describe, test, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Quiz from "frontend/src/pages/quizpage/Quiz.tsx";
+import Quiz from '../pages/quizpage/Quiz';
 
 // 1. Mock the useNavigate hook from react-router-dom
-const mockNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockNavigate,
-}));
+const mockNavigate = vi.fn();
+vi.mock("react-router-dom", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router-dom")>();
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 // 2. Mock the GraphBackground to avoid rendering complex animations in tests
-jest.mock("../../components/GraphBackground", () => () => <div data-testid="graph-background" />);
+// Note: In Vitest (ESM), it is safest to explicitly mock the 'default' export
+vi.mock("../../components/GraphBackground", () => ({
+  default: () => <div data-testid="graph-background" />
+}));
 
 describe("Quiz Component", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test("renders the first question correctly on load", () => {
@@ -34,7 +41,7 @@ describe("Quiz Component", () => {
 
   test("advances to the next question when an option is clicked (handleAnswer)", async () => {
     // Enable fake timers to bypass the 350ms setTimeout
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     render(
       <MemoryRouter>
@@ -47,7 +54,7 @@ describe("Quiz Component", () => {
     fireEvent.click(answerButton);
 
     // Fast-forward time by 350ms
-    jest.advanceTimersByTime(350);
+    vi.advanceTimersByTime(350);
 
     // Wait for the UI to update to Question 2
     await waitFor(() => {
@@ -57,7 +64,7 @@ describe("Quiz Component", () => {
       ).toBeInTheDocument();
     });
 
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   test("navigates to '/' when the back arrow is clicked on the first question (handleBack)", () => {
