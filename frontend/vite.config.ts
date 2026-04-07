@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     // Tell Vitest to use jsdom for all tests
     environment: 'jsdom', 
-    
+
     // (Optional) If you want to enable globals like expect/describe everywhere
     // globals: true,
   },
