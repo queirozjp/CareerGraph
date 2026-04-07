@@ -6,8 +6,14 @@ name: Full Stack CI (Spring Boot & React)
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - './careergraph/**' # Trigger if any file in the 'src' folder changes
+      - './frontend/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - './careergraph/**' # Trigger if any file in the 'src' folder changes
+      - './frontend/**'
 
 jobs:
   # ==========================================
