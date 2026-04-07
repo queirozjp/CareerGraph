@@ -9,6 +9,7 @@ export default defineConfig({
     environment: 'jsdom', 
     
     // (Optional) If you want to enable globals like expect/describe everywhere
-    // globals: true, 
+    // globals: true,
+
   },
 });
