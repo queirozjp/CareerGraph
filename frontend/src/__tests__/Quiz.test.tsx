@@ -1,6 +1,7 @@
 import { describe, test, expect, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import '@testing-library/jest-dom';
 import Quiz from '../pages/quizpage/Quiz';
 
 // 1. Mock the useNavigate hook from react-router-dom
@@ -20,6 +21,10 @@ vi.mock("../../components/GraphBackground", () => ({
 }));
 
 describe("Quiz Component", () => {
+    beforeAll(() => {
+        // Mocks the canvas context to prevent JSDOM crashes
+        HTMLCanvasElement.prototype.getContext = vi.fn();
+      });
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -50,8 +55,8 @@ describe("Quiz Component", () => {
     );
 
     // Click an answer option
-    const answerButton = screen.getByText("Me identifico");
-    fireEvent.click(answerButton);
+    const answerButtons = screen.getAllByText("Me identifico");
+    fireEvent.click(answerButtons[0]); // Clicks the first one found
 
     // Fast-forward time by 350ms
     vi.advanceTimersByTime(350);
