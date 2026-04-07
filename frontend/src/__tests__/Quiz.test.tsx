@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Quiz from "frontend/src/pages/quizpage/Quiz.tsx";
+import Quiz from '../pages/quizpage/Quiz';
 
 // 1. Mock the useNavigate hook from react-router-dom
 const mockNavigate = jest.fn();
