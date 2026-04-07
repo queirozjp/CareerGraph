@@ -1,7 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  test: {
+    // Tell Vitest to use jsdom for all tests
+    environment: 'jsdom', 
+    
+    // (Optional) If you want to enable globals like expect/describe everywhere
+    // globals: true, 
+  },
+});
