@@ -13,7 +13,7 @@ vi.mock("react-router-dom", async (importOriginal) => {
     useNavigate: () => mockNavigate,
   };
 });
-// oiii
+// oiiie
 // 2. Mock the GraphBackground to avoid rendering complex animations in tests
 // Note: In Vitest (ESM), it is safest to explicitly mock the 'default' export
 vi.mock("../../components/GraphBackground", () => ({
