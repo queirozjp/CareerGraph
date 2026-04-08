@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import '@testing-library/jest-dom/vitest';
 import Quiz from '../pages/quizpage/Quiz';
-
+//oieee
 // 1. Mock the useNavigate hook from react-router-dom
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async (importOriginal) => {
