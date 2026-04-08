@@ -9,7 +9,7 @@ class CareergraphApplicationTest {
 
 	@Test
 	void contextLoads() {
-		assertTrue(true, "The application context should load successfully");
+		assertTrue(false, "The application context should load successfully");
 	}
 
 }
