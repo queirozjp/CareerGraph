@@ -2,8 +2,10 @@
 * Henrique Brainer Costa RA: 10420717
 * João Pedro Queiroz de Andrade RA: 10425822
 * João Victor Vidal Barbosa RA: 10410165
-* */
+ */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -54,6 +56,12 @@ public class Main {
 
     private static void readFile(){
         graph.buildFromFile(filename);
+        Recommendation r = new Recommendation();
+        List<String> teste = new ArrayList<>();
+        teste.add("90");
+        teste.add("83");
+        Node t = r.recommendationEngine(graph, teste);
+        System.out.println(t.getName());
     }
 
     private static void updateFile(){
