@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class GraphService {
-    private final GraphModel graphModel;
+    private final GraphStructure graphStructure;
     private final DataHandler dataHandler;
 
     @Value("${graph.file.path:src/main/resources/grafo.txt}")
     private String graphFilePath;
 
-    public GraphService(GraphModel graphModel, DataHandler dataHandler) {
-        this.graphModel = graphModel;
+    public GraphService(GraphStructure graphStructure, DataHandler dataHandler) {
+        this.graphStructure = graphStructure;
         this.dataHandler = dataHandler;
     }
 
@@ -30,22 +30,22 @@ public class GraphService {
     }
 
     public void loadGraphFromFile() {
-        graphModel.reset();
-        dataHandler.loadGraph(graphFilePath, graphModel);
+        graphStructure.reset();
+        dataHandler.loadGraph(graphFilePath, graphStructure);
     }
 
     public void saveGraphToFile() {
-        dataHandler.saveGraph(graphFilePath, graphModel);
+        dataHandler.saveGraph(graphFilePath, graphStructure);
     }
 
     public GraphDTO getGraphData() {
-        List<NodeDTO> nodes = graphModel.getAllNodes().stream()
+        List<NodeDTO> nodes = graphStructure.getAllNodes().stream()
                 .map(this::convertToNodeDTO)
                 .sorted(Comparator.comparingInt(n -> Integer.parseInt(n.getId())))
                 .collect(Collectors.toList());
 
         List<EdgeDTO> edges = new ArrayList<>();
-        Map<Node, Set<Node>> adjacencyList = graphModel.getAdjacencyList();
+        Map<Node, Set<Node>> adjacencyList = graphStructure.getAdjacencyMap();
 
         for (Map.Entry<Node, Set<Node>> entry : adjacencyList.entrySet()) {
             Node source = entry.getKey();
@@ -61,11 +61,11 @@ public class GraphService {
         }
 
         return new GraphDTO(
-                graphModel.getNodeCount(),
-                graphModel.getEdgeCount(),
+                graphStructure.getNodeCount(),
+                graphStructure.getEdgeCount(),
                 nodes,
                 edges,
-                graphModel.isConnected()
+                graphStructure.isConnected()
         );
     }
 
@@ -82,13 +82,13 @@ public class GraphService {
             throw new IllegalArgumentException("Invalid node type. Must be CATEGORY or COURSE");
         }
 
-        graphModel.addNode(node);
+        graphStructure.addNode(node);
         return convertToNodeDTO(node);
     }
 
     public EdgeDTO createEdge(CreateEdgeRequest request) {
-        Node source = graphModel.findNodeById(request.getSourceId());
-        Node target = graphModel.findNodeById(request.getTargetId());
+        Node source = graphStructure.findNodeById(request.getSourceId());
+        Node target = graphStructure.findNodeById(request.getTargetId());
 
         if (source == null || target == null) {
             throw new IllegalArgumentException("Source or target node not found");
@@ -98,7 +98,7 @@ public class GraphService {
             throw new IllegalArgumentException("Cannot create edge from a node to itself");
         }
 
-        if (graphModel.hasEdge(source, target)) {
+        if (graphStructure.hasEdge(source, target)) {
             throw new IllegalArgumentException("Edge already exists between these nodes");
         }
 
@@ -106,31 +106,31 @@ public class GraphService {
             throw new IllegalArgumentException("Cannot create edge between two categories");
         }
 
-        graphModel.addEdge(source, target);
+        graphStructure.addEdge(source, target);
         return new EdgeDTO(request.getSourceId(), request.getTargetId());
     }
 
     public void deleteNode(String nodeId) {
-        Node node = graphModel.findNodeById(nodeId);
+        Node node = graphStructure.findNodeById(nodeId);
         if (node == null) {
             throw new IllegalArgumentException("Node not found");
         }
-        graphModel.removeNode(node);
+        graphStructure.removeNode(node);
     }
 
     public void deleteEdge(String sourceId, String targetId) {
-        Node source = graphModel.findNodeById(sourceId);
-        Node target = graphModel.findNodeById(targetId);
+        Node source = graphStructure.findNodeById(sourceId);
+        Node target = graphStructure.findNodeById(targetId);
 
         if (source == null || target == null) {
             throw new IllegalArgumentException("Source or target node not found");
         }
 
-        graphModel.removeEdge(source, target);
+        graphStructure.removeEdge(source, target);
     }
 
     public NodeDTO getNodeById(String nodeId) {
-        Node node = graphModel.findNodeById(nodeId);
+        Node node = graphStructure.findNodeById(nodeId);
         if (node == null) {
             throw new IllegalArgumentException("Node not found");
         }
@@ -138,19 +138,19 @@ public class GraphService {
     }
 
     public List<NodeDTO> getNeighbors(String nodeId) {
-        Node node = graphModel.findNodeById(nodeId);
+        Node node = graphStructure.findNodeById(nodeId);
         if (node == null) {
             throw new IllegalArgumentException("Node not found");
         }
 
-        return graphModel.getNeighbors(node).stream()
+        return graphStructure.getNeighbors(node).stream()
                 .map(this::convertToNodeDTO)
                 .sorted(Comparator.comparingInt(n -> Integer.parseInt(n.getId())))
                 .collect(Collectors.toList());
     }
 
     public boolean isGraphConnected() {
-        return graphModel.isConnected();
+        return graphStructure.isConnected();
     }
 
     public String getFileContent() {

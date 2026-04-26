@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class DataHandler {
     private static final Logger logger = LoggerFactory.getLogger(DataHandler.class);
 
-    public void loadGraph(String filePath, GraphModel graph) {
+    public void loadGraph(String filePath, GraphStructure graph) {
         Map<String, Node> nodeMap = new HashMap<>(); // Auxiliary to quickly search nodes by ID
         boolean readingEdges = false;
 
@@ -87,7 +87,7 @@ public class DataHandler {
         logger.info("Graph loaded successfully!");
     }
 
-    public void saveGraph(String filename, GraphModel graph) {
+    public void saveGraph(String filename, GraphStructure graph) {
         // Get all nodes from the graph and sort numerically by ID
         List<Node> sortedNodes = new ArrayList<>(graph.getAllNodes());
         sortedNodes.sort(Comparator.comparingInt(n -> Integer.parseInt(n.getId())));

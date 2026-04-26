@@ -1,4 +1,4 @@
-package com.microwaves.careergraph.service;
+package com.microwaves.careergraph.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
