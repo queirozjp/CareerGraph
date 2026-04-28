@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Recommendation {
 
-    public Node recommendationEngine(GraphModel grafo, List<String> categorias) {
+    public List<Node> recommendationEngine(GraphModel grafo, List<String> categorias) {
 
         Map<String, Integer> somaDistancias = new HashMap<>();
 
@@ -25,8 +25,6 @@ public class Recommendation {
                 Node atual = fila.poll();
                 int d = dist.get(atual.getId());
 
-                System.out.println("Visitando: " + atual + " | Nível: " + d);
-
                 for (Node vizinho : grafo.getNeighbors(atual)) {
 
                     if (!visitados.contains(vizinho.getId())) {
@@ -35,36 +33,27 @@ public class Recommendation {
                         fila.add(vizinho);
                         dist.put(vizinho.getId(), d + 1);
 
-                        System.out.println("  -> Vizinho: " + vizinho + " | Vai para nível: " + (d + 1));
-
                         if (vizinho instanceof Course) {
                             somaDistancias.put(
                                     vizinho.getId(),
                                     somaDistancias.getOrDefault(vizinho.getId(), 0) + (d + 1));
-
-                            System.out.println("     [CURSO] somaDistancias[" + vizinho.getId() + "] = "
-                                    + somaDistancias.get(vizinho.getId()));
                         }
                     }
                 }
             }
-
-        }
-        String melhorId = null;
-        int menor = Integer.MAX_VALUE;
-
-        for (String id : somaDistancias.keySet()) {
-            int valor = somaDistancias.get(id);
-
-            if (valor < menor) {
-                menor = valor;
-                melhorId = id;
-            }
         }
 
-        if (melhorId == null)
-            return null;
+        List<Map.Entry<String, Integer>> ordenado = new ArrayList<>(somaDistancias.entrySet());
 
-        return grafo.findNodeById(melhorId);
+        ordenado.sort(Map.Entry.comparingByValue());
+
+        List<Node> top5 = new ArrayList<>();
+
+        for (int i = 0; i < Math.min(5, ordenado.size()); i++) {
+            String id = ordenado.get(i).getKey();
+            top5.add(grafo.findNodeById(id));
+        }
+
+        return top5;
     }
 }
