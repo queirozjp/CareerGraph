@@ -58,10 +58,14 @@ public class Main {
         graph.buildFromFile(filename);
         Recommendation r = new Recommendation();
         List<String> teste = new ArrayList<>();
-        teste.add("90");
-        teste.add("83");
-        Node t = r.recommendationEngine(graph, teste);
-        System.out.println(t.getName());
+        teste.add("83"); //CATEGORIA_CLOUD
+        teste.add("88"); //CATEGORIA_DESENVOLVIMENTO
+        teste.add("89"); //CATEGORIA_DESIGN
+        List<Node> t = r.recommendationEngine(graph, teste);
+        for(Node nome : t){
+            System.out.println(nome.getName());
+
+        }
     }
 
     private static void updateFile(){
