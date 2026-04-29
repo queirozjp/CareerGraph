@@ -2,15 +2,16 @@ spring:
   application:
     name: careergraph
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/careergraph?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: admin123
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    open-in-view: false
 
 jwt:
   secret: EowDYBudW1TTb6XJ5uh77yYYAgxhMa2/4DLyekvR2+sf+J3OS/bBvmsz7A2O9sNq0Xc9Ehhg4dDSPBAjqQ6HUA==

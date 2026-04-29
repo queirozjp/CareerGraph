@@ -40,7 +40,7 @@ public class JwtService {
                 .getPayload();
     }
 
-    public String extractUsername(String token){
+    public String extractEmail(String token){
         return getClaims(token).getSubject();
     }
 

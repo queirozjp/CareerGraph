@@ -1,0 +1,28 @@
+{
+  "name": "careergraph",
+  "version": "1.0.0",
+  "description": "Este projeto foi desenvolvido com o objetivo de contribuir para o Objetivo de Desenvolvimento Sustentável 10 (ODS 10) da ONU - Redução das Desigualdades.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/queirozjp/CareerGraph.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/queirozjp/CareerGraph/issues"
+  },
+  "homepage": "https://github.com/queirozjp/CareerGraph#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd careergraph && mvnw spring-boot:run\" \"cd frontend && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "axios": "^1.15.2"
+  }
+}

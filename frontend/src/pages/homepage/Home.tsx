@@ -44,7 +44,7 @@ export default function Home() {
           </Button>
           </Link>
           <p className="text-sm text-[#57606a]">
-            Apenas 10 perguntas · 3 minuto
+            15 perguntas · 3 minutos
           </p>
         </div>
 
