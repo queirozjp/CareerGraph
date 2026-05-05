@@ -1,6 +1,6 @@
 package com.microwaves.careergraph.filter;
 
-import com.microwaves.careergraph.models.User;
+import com.microwaves.careergraph.entities.User;
 import com.microwaves.careergraph.repository.UserRepository;
 import com.microwaves.careergraph.service.JwtService;
 import jakarta.servlet.FilterChain;

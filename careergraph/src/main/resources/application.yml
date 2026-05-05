@@ -19,4 +19,4 @@ jwt:
 
 graph:
   file:
-    path: src/main/resources/grafo.txt
+    path: grafo.txt

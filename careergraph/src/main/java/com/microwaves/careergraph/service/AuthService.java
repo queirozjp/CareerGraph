@@ -6,7 +6,7 @@ import com.microwaves.careergraph.dto.RegisterRequest;
 import com.microwaves.careergraph.exception.EmailAlreadyExistsException;
 import com.microwaves.careergraph.exception.InvalidAuthException;
 import com.microwaves.careergraph.exception.InvalidPasswordException;
-import com.microwaves.careergraph.models.User;
+import com.microwaves.careergraph.entities.User;
 import com.microwaves.careergraph.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

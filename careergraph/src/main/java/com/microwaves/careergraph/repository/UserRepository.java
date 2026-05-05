@@ -1,6 +1,6 @@
 package com.microwaves.careergraph.repository;
 
-import com.microwaves.careergraph.models.User;
+import com.microwaves.careergraph.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

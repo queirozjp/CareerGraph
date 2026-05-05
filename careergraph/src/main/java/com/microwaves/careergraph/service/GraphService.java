@@ -16,7 +16,7 @@ public class GraphService {
     private final GraphStructure graphStructure;
     private final DataHandler dataHandler;
 
-    @Value("${graph.file.path:src/main/resources/grafo.txt}")
+    @Value("${graph.file.path:grafo.txt}")
     private String graphFilePath;
 
     public GraphService(GraphStructure graphStructure, DataHandler dataHandler) {

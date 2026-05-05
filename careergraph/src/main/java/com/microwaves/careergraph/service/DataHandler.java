@@ -17,6 +17,8 @@ public class DataHandler {
     private static final Logger logger = LoggerFactory.getLogger(DataHandler.class);
 
     public void loadGraph(String filePath, GraphStructure graph) {
+        File file = new File(filePath);
+        System.out.println("DEBUG: Tentando ler o arquivo em: " + file.getAbsolutePath());
         Map<String, Node> nodeMap = new HashMap<>(); // Auxiliary to quickly search nodes by ID
         boolean readingEdges = false;
 
