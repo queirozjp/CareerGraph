@@ -17,12 +17,14 @@
   "homepage": "https://github.com/queirozjp/CareerGraph#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"cd careergraph && mvnw spring-boot:run\" \"cd frontend && npm run dev\""
+    "start": "concurrently \"cd careergraph && mvnw spring-boot:run\" \"cd frontend && npm run dev -- --host\""
   },
   "devDependencies": {
+    "@types/cytoscape": "^3.21.9",
     "concurrently": "^9.2.1"
   },
   "dependencies": {
-    "axios": "^1.15.2"
+    "axios": "^1.15.2",
+    "cytoscape": "^3.33.3"
   }
 }

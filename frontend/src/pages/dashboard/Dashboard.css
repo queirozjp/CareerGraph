@@ -153,3 +153,31 @@
 .dash-nav-item.dash-active {
   color: #2563eb; 
 }
+
+.dash-graph-section {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.dash-cy-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #e5e4e2;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.02);
+}
+
+.dash-cy-container {
+  width: 100%;
+  height: 500px; /* Altura fixa para o grafo não colapsar */
+  background-color: #faf9f6; /* Fundo leve para destacar os nós */
+  border-radius: 10px;
+  border: 1px solid #f2f2f2;
+}
+
+/* Permitir que o mapa seja responsivo em telas menores */
+@media (max-width: 600px) {
+  .dash-cy-container {
+    height: 400px;
+  }
+}
