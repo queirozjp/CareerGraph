@@ -37,7 +37,7 @@ describe("Quiz Component", () => {
     );
 
     // Verify initial state
-    expect(screen.getByText("Pergunta 1 de 10")).toBeInTheDocument();
+    expect(screen.getByText("Pergunta 1 de 15")).toBeInTheDocument();
     expect(
       screen.getByText("Tenho facilidade em resolver problemas usando lógica e raciocínio abstrato.")
     ).toBeInTheDocument();
