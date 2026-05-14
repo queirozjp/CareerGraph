@@ -16,14 +16,21 @@ on:
       - 'frontend/**'
 
 jobs:
-  # ==========================================
-  # JOB 1: BACKEND (SPRING BOOT)
-  # ==========================================
   backend-build:
     name: Build & Test Backend
     runs-on: ubuntu-latest
 
-    # If your backend is in a subfolder, uncomment and adjust the lines below:
+    # 1. Add the MySQL service container
+    services:
+      mysql:
+        image: mysql:8.0 # Match your local MySQL version
+        env:
+          MYSQL_ROOT_PASSWORD: root # Set a temporary root password
+          MYSQL_DATABASE: careergraph # Change this to match your DB name
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     defaults:
       run:
         working-directory: ./careergraph
@@ -39,8 +46,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # The package phase automatically runs the test phase in Maven
-    - name: Test and Build with Maven
+    # 2. Add the Maven build step and inject the DB credentials
+    - name: Build with Maven
+      env:
+        # These environment variables will override your application.properties during the pipeline
+        SPRING_DATASOURCE_URL: jdbc:mysql://127.0.0.1:3306/careergraph?useSSL=false
+        SPRING_DATASOURCE_USERNAME: root
+        SPRING_DATASOURCE_PASSWORD: root
       run: mvn clean install
 
     #- name: Update dependency graph
