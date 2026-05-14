@@ -5,10 +5,10 @@ type AuthModalProps = {
   mode: "login" | "signup";
   onClose: () => void;
   onSwitchMode: (mode: "login" | "signup") => void;
-  onSuccess: () => void; 
+  onSuccess: () => void;
 };
 
-export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: AuthModalProps) { 
+export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: AuthModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -26,7 +26,6 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
 
     if (mode === "signup") {
       register();
@@ -59,7 +58,6 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
 
   async function register(){
     const savedScoresString = localStorage.getItem('FinalScores');
-
     const scores = savedScoresString ? JSON.parse(savedScoresString) : {};
 
     try {
@@ -74,7 +72,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
       setMessage(response.data.message);
       setMessageType("success");
 
-      setTimeout(() => {   // ✅ Aguarda 1.5s antes de fechar
+      setTimeout(() => {
         onSuccess();
         onClose();
       }, 1500);
@@ -94,7 +92,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
 
           <h3>{mode === "login" ? "Fazer login" : "Criar conta"}</h3>
 
-          {/* Mensagem de Erro ou Sucesso Visual na tela */}
+          {/* Mensagem de erro ou sucesso — apenas aqui, sem duplicata no form */}
           {message && (
               <div className={`message-box ${messageType}`}>
                 {message}
@@ -143,7 +141,7 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
             <button type="submit" className="btn-primary">
               {mode === "login" ? "Entrar" : "Cadastrar"}
             </button>
-            {message && <p className={`message ${messageType}`}>{message}</p>}
+            {/* ✅ <p> duplicado removido daqui */}
           </form>
 
           {mode === "login" ? (
