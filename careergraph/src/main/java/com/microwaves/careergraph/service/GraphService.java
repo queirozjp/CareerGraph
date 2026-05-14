@@ -4,6 +4,8 @@ import com.microwaves.careergraph.domain.Category;
 import com.microwaves.careergraph.domain.Course;
 import com.microwaves.careergraph.domain.Node;
 import com.microwaves.careergraph.dto.*;
+import com.microwaves.careergraph.entities.User;
+import com.microwaves.careergraph.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +17,20 @@ import java.util.stream.Collectors;
 public class GraphService {
     private final GraphStructure graphStructure;
     private final DataHandler dataHandler;
+    private final UserRepository userRepository;
+    private final RecommendationService recommendationService;
 
     @Value("${graph.file.path:grafo.txt}")
     private String graphFilePath;
 
-    public GraphService(GraphStructure graphStructure, DataHandler dataHandler) {
+    public GraphService(GraphStructure graphStructure,
+                        DataHandler dataHandler,
+                        UserRepository userRepository,
+                        RecommendationService recommendationService) {
         this.graphStructure = graphStructure;
         this.dataHandler = dataHandler;
+        this.userRepository = userRepository;
+        this.recommendationService = recommendationService;
     }
 
     @PostConstruct
@@ -38,7 +47,9 @@ public class GraphService {
         dataHandler.saveGraph(graphFilePath, graphStructure);
     }
 
-    public GraphDTO getGraphData() {
+    public GraphDTO getGraphData(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
         List<NodeDTO> nodes = graphStructure.getAllNodes().stream()
                 .map(this::convertToNodeDTO)
                 .sorted(Comparator.comparingInt(n -> Integer.parseInt(n.getId())))
@@ -65,7 +76,8 @@ public class GraphService {
                 graphStructure.getEdgeCount(),
                 nodes,
                 edges,
-                graphStructure.isConnected()
+                graphStructure.isConnected(),
+                recommendationService.recommendationEngine(graphStructure, user)
         );
     }
 

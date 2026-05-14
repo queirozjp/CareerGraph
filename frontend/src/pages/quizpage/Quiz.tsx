@@ -19,133 +19,137 @@ export interface Question {
 export const questions: Question[] = [
   {
     id: 1,
-    text: "Tenho facilidade em resolver problemas usando lógica e raciocínio abstrato.",
+    text: "Gosto de construir interfaces interativas e me importo muito com a experiência visual e a jornada do usuário.",
     impacts: [
-      { categoryId: 85, weight: 1.5 }, // DESENVOLVIMENTO
-      { categoryId: 88, weight: 1.0 }, // IA
-      { categoryId: 84, weight: 1.0 }  // DATA
+      { categoryId: 89, weight: 2.0 }, // DESIGN
+      { categoryId: 85, weight: 1.0 }, // DESENVOLVIMENTO (Frontend)
+      { categoryId: 84, weight: -0.5 } // DATA
     ]
   },
   {
     id: 2,
-    text: "Gosto de entender como as interfaces de aplicativos e sites são construídas.",
+    text: "Tenho facilidade em resolver problemas lógicos complexos criando códigos que funcionam 'nos bastidores' das aplicações.",
     impacts: [
-      { categoryId: 89, weight: 2.0 }, // DESIGN
-      { categoryId: 85, weight: 1.0 }  // DESENVOLVIMENTO (Frontend)
+      { categoryId: 85, weight: 2.0 }, // DESENVOLVIMENTO (Backend)
+      { categoryId: 90, weight: 0.5 }, // INFRA
+      { categoryId: 89, weight: -1.0 } // DESIGN (Oposto a perfis puramente visuais)
     ]
   },
   {
     id: 3,
-    text: "Sinto curiosidade em saber como os dados são armazenados e protegidos na internet.",
+    text: "Prefiro analisar grandes volumes de informações e estatísticas para encontrar padrões que ajudem na tomada de decisão.",
     impacts: [
-      { categoryId: 86, weight: 1.5 }, // SEGURANCA
-      { categoryId: 84, weight: 1.5 }, // DATA
-      { categoryId: 90, weight: 0.5 }  // INFRA
+      { categoryId: 84, weight: 2.0 }, // DATA
+      { categoryId: 88, weight: 1.5 }, // IA
+      { categoryId: 87, weight: 0.5 }  // GESTAO
     ]
   },
   {
     id: 4,
-    text: "Prefiro trabalhar em projetos que envolvem análise de números e estatísticas.",
+    text: "Tenho grande interesse em criar e treinar algoritmos para que máquinas aprendam a realizar tarefas de forma autônoma.",
     impacts: [
-      { categoryId: 84, weight: 2.0 }, // DATA
-      { categoryId: 88, weight: 1.5 }, // IA
-      { categoryId: 89, weight: -1.0 } // DESIGN (Geralmente oposto a perfis visuais puros)
+      { categoryId: 88, weight: 2.0 }, // IA
+      { categoryId: 83, weight: 1.0 }, // CLOUD
+      { categoryId: 84, weight: 1.0 }  // DATA
     ]
   },
   {
     id: 5,
-    text: "Gosto de automatizar tarefas repetitivas usando ferramentas digitais.",
+    text: "Sinto atração pela ideia de investigar vulnerabilidades ou simular ataques cibernéticos para testar a proteção de sistemas corporativos.",
     impacts: [
-      { categoryId: 85, weight: 1.5 }, // DESENVOLVIMENTO
-      { categoryId: 90, weight: 1.0 }, // INFRA (DevOps)
-      { categoryId: 83, weight: 1.0 }  // CLOUD
+      { categoryId: 86, weight: 2.0 }, // SEGURANCA
+      { categoryId: 90, weight: 1.5 }, // INFRA
+      { categoryId: 85, weight: -0.5 } // DESENVOLVIMENTO
     ]
   },
   {
     id: 6,
-    text: "Tenho interesse em aprender como funcionam as redes de computadores e servidores.",
+    text: "Me interessa projetar ambientes virtuais garantindo que dados fiquem disponíveis na internet e protegidos contra vazamentos 24 horas por dia.",
     impacts: [
-      { categoryId: 90, weight: 2.0 }, // INFRA
-      { categoryId: 83, weight: 1.5 }, // CLOUD
-      { categoryId: 86, weight: 1.0 }  // SEGURANCA
+      { categoryId: 83, weight: 2.0 }, // CLOUD
+      { categoryId: 86, weight: 1.5 }, // SEGURANCA
+      { categoryId: 84, weight: 0.5 }  // DATA
     ]
   },
   {
     id: 7,
-    text: "Sinto prazer em organizar informações de forma estruturada e hierárquica.",
+    text: "Gosto de organizar equipes, planejar o produto e garantir que a tecnologia construída resolva as reais necessidades do cliente final.",
     impacts: [
-      { categoryId: 84, weight: 1.5 }, // DATA
-      { categoryId: 87, weight: 1.0 }, // GESTAO
-      { categoryId: 89, weight: 0.5 }  // DESIGN (Arquitetura de Informação)
+      { categoryId: 87, weight: 2.0 }, // GESTAO (Product Management)
+      { categoryId: 89, weight: 1.0 }, // DESIGN
+      { categoryId: 85, weight: -0.5 } // DESENVOLVIMENTO
     ]
   },
   {
     id: 8,
-    text: "Prefiro criar a parte visual de um projeto do que lidar com regras de banco de dados.",
+    text: "Prefiro definir a arquitetura de uma solução e liderar as pessoas para entregá-la do que passar o dia todo apenas programando.",
     impacts: [
-      { categoryId: 89, weight: 2.0 }, // DESIGN
-      { categoryId: 84, weight: -1.5 },// DATA (Penalidade por rejeitar banco de dados)
-      { categoryId: 90, weight: -1.0 } // INFRA
+      { categoryId: 87, weight: 1.5 }, // GESTAO (Tech Lead)
+      { categoryId: 85, weight: 1.5 }, // DESENVOLVIMENTO
+      { categoryId: 90, weight: -0.5 } // INFRA
     ]
   },
   {
     id: 9,
-    text: "Gosto de investigar falhas e bugs para encontrar a solução de um erro técnico.",
+    text: "Gosto de investigar o comportamento humano, criar protótipos e testar a facilidade de uso de aplicativos antes de serem desenvolvidos.",
     impacts: [
-      { categoryId: 85, weight: 1.5 }, // DESENVOLVIMENTO
-      { categoryId: 86, weight: 1.0 }, // SEGURANCA
-      { categoryId: 90, weight: 1.0 }  // INFRA
+      { categoryId: 89, weight: 2.0 }, // DESIGN (UX Research)
+      { categoryId: 87, weight: 1.0 }, // GESTAO
+      { categoryId: 90, weight: -1.0 } // INFRA
     ]
   },
   {
     id: 10,
-    text: "Tenho interesse em como a Inteligência Artificial toma decisões baseada em dados.",
+    text: "Me empolga usar dados climáticos e mapeamento por satélite para aumentar a produtividade e a sustentabilidade das plantações.",
     impacts: [
-      { categoryId: 88, weight: 2.0 }, // IA
-      { categoryId: 84, weight: 1.5 }  // DATA
+      { categoryId: 91, weight: 2.0 }, // AGRO
+      { categoryId: 84, weight: 1.5 }, // DATA
+      { categoryId: 88, weight: 0.5 }  // IA
     ]
   },
   {
     id: 11,
-    text: "Tenho interesse em como a tecnologia (como sensores de solo e drones) pode melhorar a produção de alimentos e a sustentabilidade no campo.",
+    text: "Tenho interesse em trabalhar com o maquinário conectado do campo, como configurar drones, sensores de solo e redes rurais.",
     impacts: [
       { categoryId: 91, weight: 2.0 }, // AGRO
-      { categoryId: 90, weight: 0.5 }  // INFRA (Hardware/IoT)
-    ]
-  },
-  {
-    id: 12,
-    text: "Gosto de organizar equipes, planejar cronogramas e garantir que um produto tecnológico resolva o problema certo do cliente.",
-    impacts: [
-      { categoryId: 87, weight: 2.0 }, // GESTAO
-      { categoryId: 85, weight: -0.5 } // DESENVOLVIMENTO (Foco no negócio, menos no código em si)
-    ]
-  },
-  {
-    id: 13,
-    text: "Sinto atração pela ideia de simular ataques cibernéticos para encontrar e corrigir falhas de segurança antes que hackers o façam.",
-    impacts: [
-      { categoryId: 86, weight: 2.0 }, // SEGURANCA
-      { categoryId: 90, weight: 1.0 }, // INFRA
+      { categoryId: 90, weight: 1.5 }, // INFRA (Hardware/Redes)
       { categoryId: 83, weight: 0.5 }  // CLOUD
     ]
   },
   {
-    id: 14,
-    text: "Me interesso em entender como plataformas gigantes (como Netflix ou Uber) conseguem se manter no ar para milhões de usuários simultaneamente.",
+    id: 12,
+    text: "Quero trabalhar mantendo a arquitetura de plataformas que atendem milhões de usuários de forma escalável, sem sair do ar.",
     impacts: [
       { categoryId: 83, weight: 2.0 }, // CLOUD
-      { categoryId: 90, weight: 1.5 }, // INFRA
-      { categoryId: 85, weight: 0.5 }  // DESENVOLVIMENTO (Arquitetura)
+      { categoryId: 85, weight: 1.0 }, // DESENVOLVIMENTO
+      { categoryId: 90, weight: 0.5 }  // INFRA
+    ]
+  },
+  {
+    id: 13,
+    text: "Gosto de lidar com a base da tecnologia, como a configuração de redes complexas, roteadores e servidores físicos ou virtuais.",
+    impacts: [
+      { categoryId: 90, weight: 2.0 }, // INFRA
+      { categoryId: 86, weight: 1.5 }, // SEGURANCA
+      { categoryId: 89, weight: -0.5 } // DESIGN
+    ]
+  },
+  {
+    id: 14,
+    text: "Acho fascinante aplicar visão computacional e câmeras inteligentes para identificar pragas em lavouras ou monitorar o gado automaticamente.",
+    impacts: [
+      { categoryId: 88, weight: 2.0 }, // IA
+      { categoryId: 91, weight: 1.5 }, // AGRO
+      { categoryId: 84, weight: 0.5 }  // DATA
     ]
   },
   {
     id: 15,
-    text: "Gosto da ideia de traduzir necessidades complexas de negócios em soluções tecnológicas práticas e rentáveis.",
+    text: "Gosto de automatizar o processo de entrega de software, garantindo que o código dos desenvolvedores seja publicado com qualidade e segurança.",
     impacts: [
-      { categoryId: 87, weight: 2.0 }, // GESTAO
-      { categoryId: 84, weight: 1.0 }, // DATA (Business Intelligence)
-      { categoryId: 89, weight: -0.5 } // DESIGN
+      { categoryId: 85, weight: 1.5 }, // DESENVOLVIMENTO (DevOps/SecOps)
+      { categoryId: 86, weight: 1.0 }, // SEGURANCA
+      { categoryId: 87, weight: 0.5 }  // GESTAO
     ]
   }
 ];

@@ -3,6 +3,7 @@ package com.microwaves.careergraph.controller;
 import com.microwaves.careergraph.dto.*;
 import com.microwaves.careergraph.service.GraphService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +20,9 @@ public class GraphController {
     }
 
     @GetMapping
-    public ResponseEntity<GraphDTO> getGraph() {
-        return ResponseEntity.ok(graphService.getGraphData());
+    public ResponseEntity<GraphDTO> getGraph(Authentication authentication) {
+        GraphDTO response = graphService.getGraphData(authentication.getName());
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/load")

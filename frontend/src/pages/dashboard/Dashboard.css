@@ -181,3 +181,87 @@
     height: 400px;
   }
 }
+
+/* ─── Cards de Recomendação ─────────────────────────────────────── */
+
+/* Scroll horizontal no mobile, grid no desktop */
+.dash-recommendations-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  /* esconde a scrollbar mas mantém o scroll */
+  scrollbar-width: none;
+}
+.dash-recommendations-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card individual */
+.dash-rec-card {
+  flex: 0 0 200px;          /* largura fixa para scroll horizontal */
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.dash-rec-card:hover {
+  box-shadow: 0 4px 16px rgba(37,99,235,0.12);
+  transform: translateY(-2px);
+}
+
+/* Cabeçalho do card: ícone + badge de tipo */
+.dash-rec-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Badge do tipo (ex: "COURSE", "CATEGORY") */
+.dash-rec-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+/* Título do card */
+.dash-rec-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.4;
+  flex: 1;
+  margin: 0;
+}
+
+/* Botão menor para caber no card */
+.dash-rec-btn {
+  font-size: 13px;
+  padding: 6px 12px;
+  margin-top: auto;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Em telas maiores, vira grid ao invés de scroll */
+@media (min-width: 640px) {
+  .dash-recommendations-scroll {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    overflow-x: visible;
+  }
+  .dash-rec-card {
+    flex: unset;
+  }
+}

@@ -1,5 +1,6 @@
 package com.microwaves.careergraph.dto;
 
+import com.microwaves.careergraph.domain.Node;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,5 @@ public class GraphDTO {
     private List<NodeDTO> nodes;
     private List<EdgeDTO> edges;
     private boolean isConnected;
+    List<Node> recommendation;
 }
