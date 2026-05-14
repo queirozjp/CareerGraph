@@ -192,3 +192,40 @@
     padding: 16px;
   }
 }
+
+/* 1. Impede overflow horizontal no root */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* 2. Faz o overlay clipar o conteúdo */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.65);
+  z-index: 0;
+  overflow: hidden; /* ← adicione isso */
+}
+
+/* 3. Corrige o botão toggle no mobile */
+@media (max-width: 600px) {
+  .toggle-animation {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    padding: 8px 14px;   /* menor pra não vazar */
+    font-size: 12px;
+    max-width: calc(100vw - 80px); /* respeita o back-arrow à esquerda */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .quiz-container {
+    overflow-x: hidden; /* ← garante que nada vaze pelo container */
+  }
+}
