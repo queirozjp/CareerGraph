@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api  from "../../api";
+import api from "../../api";
 
 type AuthModalProps = {
   mode: "login" | "signup";
@@ -9,12 +9,11 @@ type AuthModalProps = {
 };
 
 export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: AuthModalProps) {
-  const [email, setEmail] = useState("");
+  const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("");
+  const [name, setName]         = useState("");
+  const [message, setMessage]   = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error" | "">("");
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -26,59 +25,34 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (mode === "signup") {
-      register();
-    } else {
-      login();
-    }
+    if (mode === "signup") register();
+    else login();
   };
 
-  async function login(){
+  async function login() {
     try {
-      const response = await api.post("/auth/login", {
-        email,
-        password
-      });
-      const token = response.data.token
-      localStorage.setItem("token", token)
+      const response = await api.post("/auth/login", { email, password });
+      localStorage.setItem("token", response.data.token);
       setMessage(response.data.message);
-      setMessageType("success")
-
-      setTimeout(() => {
-        onSuccess();
-        onClose();
-      }, 1500);
-    }
-    catch (error : any) {
-      setMessage(error.response?.data?.message)
-      setMessageType("error")
+      setMessageType("success");
+      setTimeout(() => { onSuccess(); onClose(); }, 1500);
+    } catch (error: any) {
+      setMessage(error.response?.data?.message || "Erro ao fazer login.");
+      setMessageType("error");
     }
   }
 
-  async function register(){
-    const savedScoresString = localStorage.getItem('FinalScores');
+  async function register() {
+    const savedScoresString = localStorage.getItem("FinalScores");
     const scores = savedScoresString ? JSON.parse(savedScoresString) : {};
-
     try {
-      const response = await api.post("/auth/register", {
-        name,
-        email,
-        password,
-        scores
-      });
-      const token = response.data.token
-      localStorage.setItem("token", token)
+      const response = await api.post("/auth/register", { name, email, password, scores });
+      localStorage.setItem("token", response.data.token);
       setMessage(response.data.message);
       setMessageType("success");
-
-      setTimeout(() => {
-        onSuccess();
-        onClose();
-      }, 1500);
-    }
-    catch (error : any) {
-      setMessage(error.response?.data?.message || "Erro ao criar conta!")
+      setTimeout(() => { onSuccess(); onClose(); }, 1500);
+    } catch (error: any) {
+      setMessage(error.response?.data?.message || "Erro ao criar conta!");
       setMessageType("error");
     }
   }
@@ -86,18 +60,9 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
   return (
       <div className="modal-overlay" onClick={onClose}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <button className="modal-close" onClick={onClose}>
-            ×
-          </button>
+          <button className="modal-close" onClick={onClose}>×</button>
 
           <h3>{mode === "login" ? "Fazer login" : "Criar conta"}</h3>
-
-          {/* Mensagem de erro ou sucesso — apenas aqui, sem duplicata no form */}
-          {message && (
-              <div className={`message-box ${messageType}`}>
-                {message}
-              </div>
-          )}
 
           <form onSubmit={handleSubmit}>
             {mode === "signup" && (
@@ -141,28 +106,22 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
             <button type="submit" className="btn-primary">
               {mode === "login" ? "Entrar" : "Cadastrar"}
             </button>
-            {/* ✅ <p> duplicado removido daqui */}
+
+            {/* Reutiliza .message do index.css — sem CSS extra necessário */}
+            {message && (
+                <p className={`message ${messageType}`}>{message}</p>
+            )}
           </form>
 
           {mode === "login" ? (
               <p className="modal-switch">
                 Não tem uma conta?{" "}
-                <button
-                    type="button"
-                    onClick={() => onSwitchMode("signup")}
-                >
-                  Criar conta
-                </button>
+                <button type="button" onClick={() => onSwitchMode("signup")}>Criar conta</button>
               </p>
           ) : (
               <p className="modal-switch">
                 Já tem conta?{" "}
-                <button
-                    type="button"
-                    onClick={() => onSwitchMode("login")}
-                >
-                  Fazer login
-                </button>
+                <button type="button" onClick={() => onSwitchMode("login")}>Fazer login</button>
               </p>
           )}
         </div>

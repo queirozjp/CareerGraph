@@ -1,5 +1,7 @@
+/* ─── Layout geral ──────────────────────────────────────────────── */
+
 .dash-page-wrapper {
-  background-color: #faf9f6; 
+  background-color: #faf9f6;
   min-height: 100vh;
   padding-bottom: 90px;
   color: #1a1a1a;
@@ -11,6 +13,8 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+
+/* ─── Topbar ────────────────────────────────────────────────────── */
 
 .dash-topbar {
   background: #ffffff;
@@ -36,6 +40,8 @@
   font-size: 18px;
 }
 
+/* ─── Boas-vindas ───────────────────────────────────────────────── */
+
 .dash-welcome {
   margin-bottom: 24px;
 }
@@ -50,6 +56,8 @@
   font-size: 14px;
   margin: 0;
 }
+
+/* ─── Grid de cards principais ──────────────────────────────────── */
 
 .dash-grid {
   display: grid;
@@ -82,7 +90,7 @@
   margin-bottom: 16px;
 }
 
-.dash-blue { background: #eff6ff; }
+.dash-blue   { background: #eff6ff; }
 .dash-yellow { background: #fffbeb; }
 
 .dash-card-title {
@@ -97,6 +105,8 @@
   margin-bottom: 20px;
   flex-grow: 1;
 }
+
+/* ─── Botão offwhite ────────────────────────────────────────────── */
 
 .dash-btn-offwhite {
   width: 100%;
@@ -115,17 +125,10 @@
   box-shadow: 0 2px 3px rgba(0,0,0,0.04);
   transition: all 0.2s ease;
 }
+.dash-btn-offwhite:hover  { background: #f2f2f2; border-color: #bcbcbc; transform: translateY(-1px); }
+.dash-btn-offwhite:active { background: #ececec; transform: translateY(0); }
 
-.dash-btn-offwhite:hover {
-  background: #f2f2f2;
-  border-color: #bcbcbc;
-  transform: translateY(-1px);
-}
-
-.dash-btn-offwhite:active {
-  background: #ececec;
-  transform: translateY(0);
-}
+/* ─── Navegação inferior ────────────────────────────────────────── */
 
 .dash-bottom-nav {
   position: fixed;
@@ -141,7 +144,7 @@
 }
 
 .dash-nav-item {
-  text-decoration: none; 
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -149,10 +152,9 @@
   gap: 4px;
   cursor: pointer;
 }
+.dash-nav-item.dash-active { color: #2563eb; }
 
-.dash-nav-item.dash-active {
-  color: #2563eb; 
-}
+/* ─── Seção do grafo ────────────────────────────────────────────── */
 
 .dash-graph-section {
   margin-top: 32px;
@@ -169,37 +171,29 @@
 
 .dash-cy-container {
   width: 100%;
-  height: 500px; /* Altura fixa para o grafo não colapsar */
-  background-color: #faf9f6; /* Fundo leve para destacar os nós */
+  height: 500px;
+  background-color: #faf9f6;
   border-radius: 10px;
   border: 1px solid #f2f2f2;
 }
 
-/* Permitir que o mapa seja responsivo em telas menores */
 @media (max-width: 600px) {
-  .dash-cy-container {
-    height: 400px;
-  }
+  .dash-cy-container { height: 400px; }
 }
 
 /* ─── Cards de Recomendação ─────────────────────────────────────── */
 
-/* Scroll horizontal no mobile, grid no desktop */
 .dash-recommendations-scroll {
   display: flex;
   gap: 14px;
   overflow-x: auto;
   padding-bottom: 8px;
-  /* esconde a scrollbar mas mantém o scroll */
   scrollbar-width: none;
 }
-.dash-recommendations-scroll::-webkit-scrollbar {
-  display: none;
-}
+.dash-recommendations-scroll::-webkit-scrollbar { display: none; }
 
-/* Card individual */
 .dash-rec-card {
-  flex: 0 0 200px;          /* largura fixa para scroll horizontal */
+  flex: 0 0 200px;
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
@@ -215,14 +209,12 @@
   transform: translateY(-2px);
 }
 
-/* Cabeçalho do card: ícone + badge de tipo */
 .dash-rec-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Badge do tipo (ex: "COURSE", "CATEGORY") */
 .dash-rec-badge {
   font-size: 10px;
   font-weight: 600;
@@ -235,7 +227,6 @@
   padding: 2px 8px;
 }
 
-/* Título do card */
 .dash-rec-card-title {
   font-size: 14px;
   font-weight: 600;
@@ -245,7 +236,6 @@
   margin: 0;
 }
 
-/* Botão menor para caber no card */
 .dash-rec-btn {
   font-size: 13px;
   padding: 6px 12px;
@@ -254,14 +244,11 @@
   justify-content: center;
 }
 
-/* Em telas maiores, vira grid ao invés de scroll */
 @media (min-width: 640px) {
   .dash-recommendations-scroll {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     overflow-x: visible;
   }
-  .dash-rec-card {
-    flex: unset;
-  }
+  .dash-rec-card { flex: unset; }
 }
