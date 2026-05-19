@@ -66,11 +66,13 @@ const Dashboard: React.FC = () => {
         (graphData.recommendation ?? []).map((n) => String(n.id))
     );
 
-    // Converte os DTOs para o formato esperado pelo Cytoscape
+    // --- CORREÇÃO DE TIPOS AQUI ---
+    // Forçamos explicitamente todos os IDs de nós e referências de arestas a serem Strings.
+    // Isso impede que o Cytoscape use índices posicionais e garante o ID correto do banco no clique.
     const elements = [
       ...graphData.nodes.map(node => ({
         data: {
-          id: node.id,
+          id: String(node.id),
           label: node.name,
           type: node.type,
           recommended: recommendedIds.has(String(node.id)),
@@ -79,8 +81,8 @@ const Dashboard: React.FC = () => {
       ...graphData.edges.map((edge, index) => ({
         data: {
           id: `e${index}`,
-          source: edge.sourceId,
-          target: edge.targetId
+          source: String(edge.sourceId),
+          target: String(edge.targetId)
         }
       }))
     ];
@@ -179,13 +181,11 @@ const Dashboard: React.FC = () => {
     });
 
     // --- INTERATIVIDADE DO MAPA ---
-    // Se o usuário clicar em um nó de curso no grafo, redireciona ele para os detalhes!
     cy.on('tap', 'node', (evt) => {
       const node = evt.target;
       const type = node.data('type');
-      const id = node.data('id');
+      const id = node.data('id'); // Agora este id retornará garantidamente a String do ID correto do banco
 
-      // Se não for uma categoria base, assume que é um nó de curso mapeado
       if (type !== 'CATEGORY') {
         navigate(`/courses/${id}`);
       }
@@ -267,7 +267,6 @@ const Dashboard: React.FC = () => {
                         </div>
                         <h4 className="dash-rec-card-title">{rec.name ?? `Curso #${rec.id}`}</h4>
 
-                        {/* IMPLEMENTAÇÃO: Redireciona dinamicamente para o ID do curso */}
                         <button
                             className="dash-btn-offwhite dash-rec-btn"
                             onClick={() => navigate(`/courses/${rec.id}`)}
