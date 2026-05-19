@@ -4,6 +4,7 @@ services:
     image: mysql:8.4
     container_name: careergraph_mysql
 
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: admin123
       MYSQL_DATABASE: careergraph
@@ -14,6 +15,12 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-padmin123" ]
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
   backend:
     build: ./careergraph
     container_name: careergraph_backend
@@ -22,7 +29,8 @@ services:
       - "8080:8080"
 
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/careergraph
