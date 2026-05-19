@@ -11,13 +11,20 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "cursos")
-public class Curso {
+public class Course {
+
     @Id
-    private Integer id;
+    private Long id;
+
     @Column(name = "nome")
     private String name;
+
+    @Column(name = "short_descricao")
+    private String shortDescription;
+
     @Column(name = "descricao")
     private String description;
-    @ManyToMany(mappedBy = "cursos")
-    private Set<InstituicaoEnsino> instituicaoEnsino = new HashSet<>();
+
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
+    private Set<EducationalInstitution> educationalInstitution = new HashSet<>();
 }

@@ -38,12 +38,67 @@
   margin: 0 auto;
 }
 
+/* ─── Bloco CTA Unificado ─── */
 .cta {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  width: 100%;
 }
 
+/* ─── Botão Começar Agora Corrigido ─── */
+.ctaButton {
+  background-color: #24292f; /* Troquei por #24292f para combinar com a cor do seu título */
+  color: white;
+  border: none;
+  width: 100%;
+  max-width: 280px; /* Adicionado para ficar idêntico ao de login */
+  border-radius: 10px; /* Ajustado para 10px para bater com o de login */
+  padding: 12px; /* Ajustado para bater com o de login */
+  font-size: 15px; /* Ajustado para bater com o de login */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.ctaButton:hover {
+  background-color: #0f1115;
+  transform: translateY(-1px);
+}
+
+.ctaButton:active {
+  background-color: #000000;
+  transform: translateY(0);
+}
+
+/* ─── Botão de Login Limpo e Alinhado ─── */
+.homeLoginButton {
+  width: 100%;
+  max-width: 280px; /* Mantido em 280px */
+  padding: 12px;
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 2px solid #1a1a1a !important;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.homeLoginButton:hover {
+  background-color: #f6f8fa !important;
+  transform: translateY(-1px);
+}
+
+.homeLoginButton:active {
+  background-color: #eef1f4 !important;
+  transform: translateY(0);
+}
+
+/* ─── Recursos Inferiores ─── */
 .features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -59,20 +114,4 @@
   gap: 0.5rem;
   font-size: 0.75rem;
   color: #57606a;
-}
-.ctaButton {
-  background-color: #555; 
-  color: white;
-  border: none;
-  width: 100%;
-  border-radius: 6px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.ctaButton:hover {
-  background-color: #444; 
-  transition: all 0.2s ease;
 }

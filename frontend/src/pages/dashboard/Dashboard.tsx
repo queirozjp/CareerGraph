@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Dashboard.css";
 import { Home, BookOpen, FileText, User, TrendingUp, Book, ChevronRight, Star } from "lucide-react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import cytoscape from 'cytoscape';
 import api from '../../api.ts'; // Importando sua instância do Axios
 
@@ -21,6 +21,7 @@ interface EdgeDTO {
 interface RecommendationNode {
   id: string;
   name?: string;
+  type?: string;
   [key: string]: unknown;
 }
 
@@ -34,6 +35,7 @@ interface GraphDTO {
 }
 
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   const cyRef = useRef<HTMLDivElement>(null);
 
   // Estados para lidar com os dados da API e carregamento
@@ -64,8 +66,7 @@ const Dashboard: React.FC = () => {
         (graphData.recommendation ?? []).map((n) => String(n.id))
     );
 
-    // Converte os DTOs para o formato esperado pelo Cytoscape,
-    // marcando cada nó como recomendado ou não
+    // Converte os DTOs para o formato esperado pelo Cytoscape
     const elements = [
       ...graphData.nodes.map(node => ({
         data: {
@@ -88,20 +89,17 @@ const Dashboard: React.FC = () => {
       container: cyRef.current,
       elements: elements,
       style: [
-        // --- Nós padrão (não recomendados) ---
         {
           selector: 'node',
           style: {
-            'background-color': '#cbd5e1',       // cinza-azulado discreto
+            'background-color': '#cbd5e1',
             'border-width': 0,
-            'label': '',                          // sem label por padrão
+            'label': '',
             'width': 14,
             'height': 14,
             'opacity': 0.45,
           }
         },
-
-        // --- Nós do tipo CATEGORY (não recomendados) ---
         {
           selector: 'node[type="CATEGORY"]',
           style: {
@@ -111,15 +109,13 @@ const Dashboard: React.FC = () => {
             'opacity': 0.5,
           }
         },
-
-        // --- Nós RECOMENDADOS (qualquer tipo) ---
         {
           selector: 'node[?recommended]',
           style: {
-            'background-color': '#2563eb',        // azul destaque
+            'background-color': '#2563eb',
             'border-color': '#1d4ed8',
             'border-width': 2,
-            'label': 'data(label)',               // exibe o nome apenas aqui
+            'label': 'data(label)',
             'color': '#1a1a1a',
             'font-family': 'sans-serif',
             'font-size': '11px',
@@ -138,8 +134,6 @@ const Dashboard: React.FC = () => {
             'z-index': 10,
           }
         },
-
-        // --- Nós RECOMENDADOS do tipo CATEGORY ---
         {
           selector: 'node[?recommended][type="CATEGORY"]',
           style: {
@@ -152,10 +146,8 @@ const Dashboard: React.FC = () => {
             'z-index': 20,
           }
         },
-
-        // --- Arestas conectadas a nós recomendados ---
         {
-          selector: 'edge[source != ""]',       // todas as arestas, estilo base
+          selector: 'edge[source != ""]',
           style: {
             'width': 1.5,
             'line-color': '#e2e8f0',
@@ -171,7 +163,7 @@ const Dashboard: React.FC = () => {
       }
     });
 
-    // Após o layout, destaca as arestas que ligam nós recomendados
+    // Destaca as arestas que ligam nós recomendados
     cy.ready(() => {
       cy.edges().forEach((edge) => {
         const srcRecommended = edge.source().data('recommended');
@@ -186,10 +178,23 @@ const Dashboard: React.FC = () => {
       });
     });
 
+    // --- INTERATIVIDADE DO MAPA ---
+    // Se o usuário clicar em um nó de curso no grafo, redireciona ele para os detalhes!
+    cy.on('tap', 'node', (evt) => {
+      const node = evt.target;
+      const type = node.data('type');
+      const id = node.data('id');
+
+      // Se não for uma categoria base, assume que é um nó de curso mapeado
+      if (type !== 'CATEGORY') {
+        navigate(`/courses/${id}`);
+      }
+    });
+
     return () => {
       if (cy) cy.destroy();
     };
-  }, [graphData]);
+  }, [graphData, navigate]);
 
   return (
       <div className="dash-page-wrapper">
@@ -221,7 +226,8 @@ const Dashboard: React.FC = () => {
               </div>
               <h3 className="dash-card-title">Refazer Questionário</h3>
               <p className="dash-card-text">Atualize suas preferências e obtenha novas recomendações personalizadas.</p>
-              <button className="dash-btn-offwhite">
+              <button className="dash-btn-offwhite"
+                      onClick={() => navigate('/quiz')}>
                 Começar quiz <ChevronRight size={16} />
               </button>
             </div>
@@ -232,7 +238,8 @@ const Dashboard: React.FC = () => {
               </div>
               <h3 className="dash-card-title">Explorar Cursos</h3>
               <p className="dash-card-text">Navegue por nossa biblioteca completa de cursos em tecnologia.</p>
-              <button className="dash-btn-offwhite">
+              <button className="dash-btn-offwhite"
+                      onClick={() => navigate('/courses')}>
                 Ver cursos <ChevronRight size={16} />
               </button>
             </div>
@@ -259,7 +266,12 @@ const Dashboard: React.FC = () => {
                           )}
                         </div>
                         <h4 className="dash-rec-card-title">{rec.name ?? `Curso #${rec.id}`}</h4>
-                        <button className="dash-btn-offwhite dash-rec-btn">
+
+                        {/* IMPLEMENTAÇÃO: Redireciona dinamicamente para o ID do curso */}
+                        <button
+                            className="dash-btn-offwhite dash-rec-btn"
+                            onClick={() => navigate(`/courses/${rec.id}`)}
+                        >
                           Ver curso <ChevronRight size={14} />
                         </button>
                       </div>
@@ -272,10 +284,9 @@ const Dashboard: React.FC = () => {
           <div className="dash-graph-section">
             <h3 className="dash-card-title">Seu Mapa de Conhecimento</h3>
             <p className="dash-subtitle" style={{ marginBottom: '8px' }}>
-              Explore as conexões entre as áreas de tecnologia e os cursos recomendados.
+              Explore as conexões entre as áreas de tecnologia e os cursos recomendados (clique nos nós destacados para abrir).
             </p>
 
-            {/* Legenda */}
             <div style={{ display: 'flex', gap: '20px', marginBottom: '16px', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#555' }}>
                 <span style={{ display: 'inline-block', width: 14, height: 14, borderRadius: '50%', background: '#2563eb', border: '2px solid #1d4ed8' }} />

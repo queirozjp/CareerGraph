@@ -1,6 +1,6 @@
 package com.microwaves.careergraph.entities;
 
-import com.microwaves.careergraph.domain.Course;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,21 +11,27 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "instituicao_ensino")
-public class InstituicaoEnsino {
+public class EducationalInstitution {
 
     @Id
-    private String id;
+    private Long id;
+
     @Column(name = "nome")
     private String name;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "descricao")
     private String description;
+
     @ManyToMany
     @JoinTable(
             name = "instituicao_curso",
-            joinColumns = @JoinColumn(name = "curso_id"),
-            inverseJoinColumns = @JoinColumn(name = "instituicao_id")
+            // CORREÇÃO 2: A ordem das chaves estava invertida!
+            joinColumns = @JoinColumn(name = "instituicao_id"),
+            inverseJoinColumns = @JoinColumn(name = "curso_id")
     )
-    private List<Curso> cursos;
+    @JsonIgnore
+    private List<Course> courses;
 }

@@ -113,17 +113,6 @@ export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: Au
             )}
           </form>
 
-          {mode === "login" ? (
-              <p className="modal-switch">
-                Não tem uma conta?{" "}
-                <button type="button" onClick={() => onSwitchMode("signup")}>Criar conta</button>
-              </p>
-          ) : (
-              <p className="modal-switch">
-                Já tem conta?{" "}
-                <button type="button" onClick={() => onSwitchMode("login")}>Fazer login</button>
-              </p>
-          )}
         </div>
       </div>
   );

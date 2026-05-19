@@ -207,7 +207,7 @@ export default function Quiz() {
       localStorage.setItem('FinalScores', JSON.stringify(finalScores));
 
       setTimeout(() => {
-        navigate("/login");
+        navigate("/register");
       }, 500);
     } else {
 

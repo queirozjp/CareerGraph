@@ -1,0 +1,191 @@
+/* ==========================================================================
+   CourseDetails.css - Baseado na identidade visual do Courses.css
+   ========================================================================== */
+
+/* Wrappers de Carregamento e Erros Customizados */
+.details-loading-wrapper,
+.details-error-wrapper {
+    background-color: #faf9f6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    color: #666;
+    font-family: 'Inter', sans-serif;
+}
+
+.details-error-wrapper p {
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* Ícone de Loading Giratório */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Botão de Navegação Interna (Voltar) */
+.details-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: #2563eb; /* Usando o azul padrão do seu CSS */
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 24px;
+    padding: 0;
+    transition: opacity 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.details-back-btn:hover {
+    opacity: 0.8;
+}
+
+/* Card Principal de Informações do Curso */
+.details-main-card {
+    background: #ffffff;
+    border: 1px solid #e5e4e2;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+/* Badge indicativa de categoria superior */
+.details-badge {
+    font-size: 11px;
+    background: #eff6ff; /* Azul clarinho suave */
+    color: #2563eb;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.details-course-title {
+    font-size: 24px;
+    color: #1a1a1a;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.details-course-short {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Divisor idêntico aos padrões sutis do projeto */
+.details-divider {
+    border: 0;
+    border-top: 1px solid #e5e4e2;
+    margin-bottom: 20px;
+}
+
+.details-section-title {
+    font-size: 18px;
+    color: #1a1a1a;
+    margin: 0 0 12px 0;
+    font-weight: 700;
+}
+
+.details-course-description {
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Seção Inferior: Onde Estudar (Instituições) */
+.details-institutions-section {
+    margin-top: 16px;
+}
+
+.details-institutions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+/* Card Dinâmico da Faculdade */
+.details-inst-card {
+    background: #ffffff;
+    border: 1px solid #e5e4e2;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+    transition: transform 0.2s;
+}
+
+.details-inst-card:hover {
+    transform: translateY(-2px); /* Pequena elevação interativa */
+}
+
+.details-inst-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+/* Caixa contendo o ícone MapPin */
+.details-inst-icon-box {
+    background: #eff6ff;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.details-inst-card h4 {
+    font-size: 16px;
+    margin: 0;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.details-inst-desc {
+    color: #555;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+}
+
+/* Exibição sutil do e-mail de contato da faculdade */
+.details-inst-email {
+    font-size: 12px;
+    color: #2563eb;
+    background: #faf9f6;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    display: inline-block;
+}
+
+/* Estado vazio */
+.details-no-inst {
+    color: #888;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+}
