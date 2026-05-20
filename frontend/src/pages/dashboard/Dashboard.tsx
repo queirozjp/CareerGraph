@@ -61,14 +61,10 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     if (!cyRef.current || !graphData) return;
 
-    // Cria um Set com os IDs dos nós recomendados para lookup O(1)
     const recommendedIds = new Set(
         (graphData.recommendation ?? []).map((n) => String(n.id))
     );
 
-    // --- CORREÇÃO DE TIPOS AQUI ---
-    // Forçamos explicitamente todos os IDs de nós e referências de arestas a serem Strings.
-    // Isso impede que o Cytoscape use índices posicionais e garante o ID correto do banco no clique.
     const elements = [
       ...graphData.nodes.map(node => ({
         data: {
@@ -136,8 +132,9 @@ const Dashboard: React.FC = () => {
             'z-index': 10,
           }
         },
+        // --- NOVO: Estilo específico para as categorias que ligam aos recomendados ---
         {
-          selector: 'node[?recommended][type="CATEGORY"]',
+          selector: 'node.highlighted-category',
           style: {
             'background-color': '#d97706',
             'border-color': '#b45309',
@@ -145,9 +142,21 @@ const Dashboard: React.FC = () => {
             'width': 38,
             'height': 38,
             'font-size': '13px',
+            'label': 'data(label)',
+            'color': '#1a1a1a',
+            'font-family': 'sans-serif',
+            'font-weight': 'bold',
+            'text-valign': 'bottom',
+            'text-margin-y': 7,
+            'text-background-color': '#ffffff',
+            'text-background-opacity': 0.75,
+            'text-background-padding': '2px',
+            'text-background-shape': 'roundrectangle',
             'z-index': 20,
+            'opacity': 1,
           }
         },
+        // --------------------------------------------------------------------------
         {
           selector: 'edge[source != ""]',
           style: {
@@ -165,11 +174,28 @@ const Dashboard: React.FC = () => {
       }
     });
 
-    // Destaca as arestas que ligam nós recomendados
     cy.ready(() => {
+      // --- NOVO: Lógica para encontrar e destacar as categorias ---
+
+      // 1. Pega todos os nós que foram marcados como recomendados
+      const recommendedNodes = cy.nodes('[?recommended]');
+
+      // 2. Procura ao redor deles (vizinhos) quem tem o type="CATEGORY"
+      // Utilizamos o neighborhood() para garantir que pegue a categoria
+      // independentemente da direção da seta (Source -> Target ou Target -> Source)
+      const parentCategories = recommendedNodes.neighborhood('node[type="CATEGORY"]');
+
+      // 3. Aplica a classe que criamos lá em cima nos estilos
+      parentCategories.addClass('highlighted-category');
+
+      // ------------------------------------------------------------
+
+      // A sua lógica original de destacar as arestas se mantém, pois queremos
+      // destacar apenas o "caminho" e não todas as arestas que saem da categoria
       cy.edges().forEach((edge) => {
         const srcRecommended = edge.source().data('recommended');
         const tgtRecommended = edge.target().data('recommended');
+
         if (srcRecommended || tgtRecommended) {
           edge.style({
             'line-color': '#93c5fd',
@@ -180,11 +206,10 @@ const Dashboard: React.FC = () => {
       });
     });
 
-    // --- INTERATIVIDADE DO MAPA ---
     cy.on('tap', 'node', (evt) => {
       const node = evt.target;
       const type = node.data('type');
-      const id = node.data('id'); // Agora este id retornará garantidamente a String do ID correto do banco
+      const id = node.data('id');
 
       if (type !== 'CATEGORY') {
         navigate(`/courses/${id}`);
@@ -297,7 +322,7 @@ const Dashboard: React.FC = () => {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#aaa' }}>
                 <span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: '50%', background: '#cbd5e1' }} />
-                Outros nós
+                Outros cursos
               </div>
             </div>
 
