@@ -39,7 +39,7 @@ const Profile: React.FC = () => {
     localStorage.removeItem('token');
 
     // 2. Redireciona o usuário de volta para a tela de login
-    navigate('/register');
+    navigate('/');
   };
 
   return (
