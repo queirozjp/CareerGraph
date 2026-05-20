@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import Home from "../homepage/Home";
 import Quiz from "../quizpage/Quiz";
 import Result from "../resultpage/Result";
@@ -7,6 +7,14 @@ import Courses from "../coursespage/Courses";
 import CourseDetails from "../coursespage/CourseDetails"; // <-- IMPORTAR A NOVA TELA (Criaremos abaixo)
 import Tutorial from "../tutorialpage/Tutorial";
 import Profile from "../profilepage/Profile";
+
+const PrivateRoutes = ({children}) => {
+  const token = localStorage.getItem("token");
+  if(!token){
+    return <Navigate to="/" replace />
+  }
+  return children;
+}
 
 const router = createBrowserRouter([
   {
@@ -23,23 +31,43 @@ const router = createBrowserRouter([
   },
   {
     path: "/dash",
-    element: <Dashboard />,
+    element: (
+        <PrivateRoutes>
+          <Dashboard />
+        </PrivateRoutes>
+    ),
   },
   {
     path: "/courses",
-    element: <Courses />,
+    element: (
+        <RotaPrivada>
+          <Courses />
+        </RotaPrivada>
+    ),
   },
   {
     path: "/courses/:id",
-    element: <CourseDetails />,
+    element: (
+        <RotaPrivada>
+          <CourseDetails />
+        </RotaPrivada>
+    ),
   },
   {
     path: "/tutorial",
-    element: <Tutorial />,
+    element: (
+        <RotaPrivada>
+          <Tutorial />
+        </RotaPrivada>
+    ),
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: (
+        <RotaPrivada>
+          <Profile />
+        </RotaPrivada>
+    ),
   },
 ]);
 
