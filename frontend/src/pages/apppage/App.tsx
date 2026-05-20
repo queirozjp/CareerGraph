@@ -40,33 +40,33 @@ const router = createBrowserRouter([
   {
     path: "/courses",
     element: (
-        <RotaPrivada>
+        <PrivateRoutes>
           <Courses />
-        </RotaPrivada>
+        </PrivateRoutes>
     ),
   },
   {
     path: "/courses/:id",
     element: (
-        <RotaPrivada>
+        <PrivateRoutes>
           <CourseDetails />
-        </RotaPrivada>
+        </PrivateRoutes>
     ),
   },
   {
     path: "/tutorial",
     element: (
-        <RotaPrivada>
+        <PrivateRoutes>
           <Tutorial />
-        </RotaPrivada>
+        </PrivateRoutes>
     ),
   },
   {
     path: "/profile",
     element: (
-        <RotaPrivada>
+        <PrivateRoutes>
           <Profile />
-        </RotaPrivada>
+        </PrivateRoutes>
     ),
   },
 ]);
