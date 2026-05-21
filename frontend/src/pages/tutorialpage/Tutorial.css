@@ -172,22 +172,29 @@
   color: #2563eb; 
 }
 
-/* Estilo para centralizar e formatar os botões de cursos/vídeos */
+/* Atualize o card para não forçar a altura e evitar sobreposição */
+.courses-card {
+  display: flex;
+  flex-direction: column;
+  /* Removido o height: 100% e o justify-content */
+}
+
+/* O botão continua com a mesma base, mas usamos margin-top: auto */
 .courses-btn-offwhite {
   display: flex;
-  align-items: center;       /* Centraliza o ícone e o texto verticalmente */
-  justify-content: center;   /* Centraliza o conteúdo horizontalmente */
-  gap: 10px;                 /* Dá um espaço entre o ícone do Youtube e o texto */
-  width: 100%;               /* Faz o botão ocupar toda a largura do card */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
   box-sizing: border-box;
   padding: 12px 20px;
-  background-color: #f8f9fa; /* Cor de fundo "offwhite" */
+  background-color: #f8f9fa;
   color: #1a1a1a;
   border: 1px solid #e5e4e2;
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
-  margin-top: 20px;          /* Empurra o botão para baixo, separando do texto */
+  margin-top: auto; /* O SEGREDO: Isso empurra o botão para o fundo do card sozinho */
   transition: all 0.2s ease;
   cursor: pointer;
 }
@@ -195,13 +202,4 @@
 .courses-btn-offwhite:hover {
   background-color: #f1f5f9;
   border-color: #cbd5e1;
-}
-
-/* (Opcional) Para garantir que os botões fiquem sempre no rodapé do card,
-   mesmo se os textos tiverem tamanhos diferentes, adicione flexbox no card: */
-.courses-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
 }
