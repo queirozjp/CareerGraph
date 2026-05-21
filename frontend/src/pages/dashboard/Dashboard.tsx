@@ -32,6 +32,7 @@ interface GraphDTO {
   edges: EdgeDTO[];
   isConnected: boolean;
   recommendation: RecommendationNode[];
+  recommendedCategories: RecommendationNode[]; // Nova propriedade adicionada
 }
 
 const Dashboard: React.FC = () => {
@@ -61,8 +62,14 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     if (!cyRef.current || !graphData) return;
 
+    // Set para busca rápida dos IDs de cursos recomendados
     const recommendedIds = new Set(
         (graphData.recommendation ?? []).map((n) => String(n.id))
+    );
+
+    // Set para busca rápida dos IDs de categorias recomendadas
+    const recommendedCategoryIds = new Set(
+        (graphData.recommendedCategories ?? []).map((n) => String(n.id))
     );
 
     const elements = [
@@ -72,6 +79,7 @@ const Dashboard: React.FC = () => {
           label: node.name,
           type: node.type,
           recommended: recommendedIds.has(String(node.id)),
+          isRecommendedCategory: recommendedCategoryIds.has(String(node.id)), // Flag da categoria
         }
       })),
       ...graphData.edges.map((edge, index) => ({
@@ -132,9 +140,9 @@ const Dashboard: React.FC = () => {
             'z-index': 10,
           }
         },
-        // --- NOVO: Estilo específico para as categorias que ligam aos recomendados ---
+        // Estilo específico para as categorias recomendadas pelo backend
         {
-          selector: 'node.highlighted-category',
+          selector: 'node[?isRecommendedCategory]',
           style: {
             'background-color': '#d97706',
             'border-color': '#b45309',
@@ -156,7 +164,6 @@ const Dashboard: React.FC = () => {
             'opacity': 1,
           }
         },
-        // --------------------------------------------------------------------------
         {
           selector: 'edge[source != ""]',
           style: {
@@ -175,28 +182,13 @@ const Dashboard: React.FC = () => {
     });
 
     cy.ready(() => {
-      // --- NOVO: Lógica para encontrar e destacar as categorias ---
-
-      // 1. Pega todos os nós que foram marcados como recomendados
-      const recommendedNodes = cy.nodes('[?recommended]');
-
-      // 2. Procura ao redor deles (vizinhos) quem tem o type="CATEGORY"
-      // Utilizamos o neighborhood() para garantir que pegue a categoria
-      // independentemente da direção da seta (Source -> Target ou Target -> Source)
-      const parentCategories = recommendedNodes.neighborhood('node[type="CATEGORY"]');
-
-      // 3. Aplica a classe que criamos lá em cima nos estilos
-      parentCategories.addClass('highlighted-category');
-
-      // ------------------------------------------------------------
-
-      // A sua lógica original de destacar as arestas se mantém, pois queremos
-      // destacar apenas o "caminho" e não todas as arestas que saem da categoria
+      // Destacar arestas que conectam nós recomendados (cursos ou categorias)
       cy.edges().forEach((edge) => {
-        const srcRecommended = edge.source().data('recommended');
-        const tgtRecommended = edge.target().data('recommended');
+        const srcRecommended = edge.source().data('recommended') || edge.source().data('isRecommendedCategory');
+        const tgtRecommended = edge.target().data('recommended') || edge.target().data('isRecommendedCategory');
 
-        if (srcRecommended || tgtRecommended) {
+        // Se ambos os lados da aresta forem nós de interesse, destacamos o caminho
+        if (srcRecommended && tgtRecommended) {
           edge.style({
             'line-color': '#93c5fd',
             'width': 2.5,

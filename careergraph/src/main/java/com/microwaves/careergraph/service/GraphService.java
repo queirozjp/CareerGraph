@@ -71,13 +71,18 @@ public class GraphService {
             }
         }
 
+        RecommendationDTO recomendationDto = recommendationService.recommendationEngine(graphStructure, user);
+        List<Node> recCourses = recomendationDto.recommendations();
+        List<Node> recCategories = recomendationDto.recommendedCategories();
+
         return new GraphDTO(
                 graphStructure.getNodeCount(),
                 graphStructure.getEdgeCount(),
                 nodes,
                 edges,
                 graphStructure.isConnected(),
-                recommendationService.recommendationEngine(graphStructure, user)
+                recCourses,
+                recCategories
         );
     }
 

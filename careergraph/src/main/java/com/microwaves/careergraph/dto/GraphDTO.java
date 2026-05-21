@@ -18,4 +18,5 @@ public class GraphDTO {
     private List<EdgeDTO> edges;
     private boolean isConnected;
     List<Node> recommendation;
+    List<Node> recommendedCategories;
 }

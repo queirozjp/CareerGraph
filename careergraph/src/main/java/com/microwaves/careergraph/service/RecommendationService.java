@@ -2,7 +2,9 @@ package com.microwaves.careergraph.service;
 
 import com.microwaves.careergraph.domain.Course;
 import com.microwaves.careergraph.domain.Node;
+import com.microwaves.careergraph.dto.RecommendationDTO;
 import com.microwaves.careergraph.entities.User;
+import com.microwaves.careergraph.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,8 +12,13 @@ import java.util.*;
 @Service
 public class RecommendationService {
 
-    public List<Node> recommendationEngine(GraphStructure graph, User user) {
+    CourseRepository courseRepository;
 
+    public RecommendationService(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
+
+    public RecommendationDTO recommendationEngine(GraphStructure graph, User user) {
         Map<String, Double> scores = user.getScores();
 
         List<Map.Entry<String, Double>> top4Categories = scores.entrySet()
@@ -21,9 +28,12 @@ public class RecommendationService {
                 .toList();
 
         List<String> categories = new ArrayList<>();
+        List<Node> recommendedCategories = new ArrayList<>();
 
         for (Map.Entry<String, Double> entry : top4Categories) {
             categories.add(entry.getKey());
+            Node categorie = graph.findNodeById(entry.getKey());
+            recommendedCategories.add(categorie);
         }
 
         Map<String, Integer> distanceSums = new HashMap<>();
@@ -82,6 +92,9 @@ public class RecommendationService {
             top5.add(graph.findNodeById(id));
         }
 
-        return top5;
+        return new RecommendationDTO(
+                top5,
+                recommendedCategories
+        );
     }
 }
