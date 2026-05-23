@@ -3,9 +3,8 @@ import "./Dashboard.css";
 import { Home, BookOpen, FileText, User, TrendingUp, Book, ChevronRight, Star } from "lucide-react";
 import { NavLink, useNavigate } from 'react-router-dom';
 import cytoscape from 'cytoscape';
-import api from '../../api.ts'; // Importando sua instância do Axios
+import api from '../../api.ts';
 
-// Interfaces baseadas no DTO do seu backend Spring Boot
 interface NodeDTO {
   id: string;
   name: string;
@@ -17,7 +16,6 @@ interface EdgeDTO {
   targetId: string;
 }
 
-// Interface para os nós de recomendação vindos do backend (domínio Node)
 interface RecommendationNode {
   id: string;
   name?: string;
@@ -32,19 +30,17 @@ interface GraphDTO {
   edges: EdgeDTO[];
   isConnected: boolean;
   recommendation: RecommendationNode[];
-  recommendedCategories: RecommendationNode[]; // Nova propriedade adicionada
+  recommendedCategories: RecommendationNode[];
 }
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
   const cyRef = useRef<HTMLDivElement>(null);
 
-  // Estados para lidar com os dados da API e carregamento
   const [graphData, setGraphData] = useState<GraphDTO | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Efeito para buscar os dados na API
   useEffect(() => {
     api.get("/api/graph")
         .then((res) => {
@@ -58,16 +54,13 @@ const Dashboard: React.FC = () => {
         });
   }, []);
 
-  // Efeito para renderizar o Cytoscape quando os dados chegarem
   useEffect(() => {
     if (!cyRef.current || !graphData) return;
 
-    // Set para busca rápida dos IDs de cursos recomendados
     const recommendedIds = new Set(
         (graphData.recommendation ?? []).map((n) => String(n.id))
     );
 
-    // Set para busca rápida dos IDs de categorias recomendadas
     const recommendedCategoryIds = new Set(
         (graphData.recommendedCategories ?? []).map((n) => String(n.id))
     );
@@ -79,7 +72,7 @@ const Dashboard: React.FC = () => {
           label: node.name,
           type: node.type,
           recommended: recommendedIds.has(String(node.id)),
-          isRecommendedCategory: recommendedCategoryIds.has(String(node.id)), // Flag da categoria
+          isRecommendedCategory: recommendedCategoryIds.has(String(node.id)),
         }
       })),
       ...graphData.edges.map((edge, index) => ({
@@ -98,31 +91,31 @@ const Dashboard: React.FC = () => {
         {
           selector: 'node',
           style: {
-            'background-color': '#cbd5e1',
+            'background-color': '#3f3f3f',
             'border-width': 0,
             'label': '',
             'width': 14,
             'height': 14,
-            'opacity': 0.45,
+            'opacity': 0.35,
           }
         },
         {
           selector: 'node[type="CATEGORY"]',
           style: {
-            'background-color': '#fbbf24',
-            'width': 26,
-            'height': 26,
-            'opacity': 0.5,
+            'background-color': '#6b6b6b',
+            'width': 20,
+            'height': 20,
+            'opacity': 0.45,
           }
         },
         {
           selector: 'node[?recommended]',
           style: {
-            'background-color': '#2563eb',
-            'border-color': '#1d4ed8',
+            'background-color': '#ffffff',
+            'border-color': '#000000',
             'border-width': 2,
             'label': 'data(label)',
-            'color': '#1a1a1a',
+            'color': '#000000',
             'font-family': 'sans-serif',
             'font-size': '11px',
             'font-weight': 'bold',
@@ -131,7 +124,7 @@ const Dashboard: React.FC = () => {
             'text-wrap': 'wrap',
             'text-max-width': '110px',
             'text-background-color': '#ffffff',
-            'text-background-opacity': 0.75,
+            'text-background-opacity': 0.9,
             'text-background-padding': '2px',
             'text-background-shape': 'roundrectangle',
             'width': 26,
@@ -140,24 +133,23 @@ const Dashboard: React.FC = () => {
             'z-index': 10,
           }
         },
-        // Estilo específico para as categorias recomendadas pelo backend
         {
           selector: 'node[?isRecommendedCategory]',
           style: {
-            'background-color': '#d97706',
-            'border-color': '#b45309',
-            'border-width': 3,
-            'width': 38,
-            'height': 38,
-            'font-size': '13px',
+            'background-color': '#000000',
+            'border-color': '#ffffff',
+            'border-width': 2,
+            'width': 18,
+            'height': 18,
+            'font-size': '11px',
             'label': 'data(label)',
-            'color': '#1a1a1a',
+            'color': '#000000',
             'font-family': 'sans-serif',
             'font-weight': 'bold',
             'text-valign': 'bottom',
             'text-margin-y': 7,
             'text-background-color': '#ffffff',
-            'text-background-opacity': 0.75,
+            'text-background-opacity': 0.9,
             'text-background-padding': '2px',
             'text-background-shape': 'roundrectangle',
             'z-index': 20,
@@ -165,12 +157,12 @@ const Dashboard: React.FC = () => {
           }
         },
         {
-          selector: 'edge[source != ""]',
+          selector: 'edge',
           style: {
-            'width': 1.5,
-            'line-color': '#e2e8f0',
+            'width': 1.2,
+            'line-color': '#555555',
             'curve-style': 'bezier',
-            'opacity': 0.35,
+            'opacity': 0.25,
           }
         },
       ],
@@ -179,23 +171,6 @@ const Dashboard: React.FC = () => {
         padding: 20,
         animate: false
       }
-    });
-
-    cy.ready(() => {
-      // Destacar arestas que conectam nós recomendados (cursos ou categorias)
-      cy.edges().forEach((edge) => {
-        const srcRecommended = edge.source().data('recommended') || edge.source().data('isRecommendedCategory');
-        const tgtRecommended = edge.target().data('recommended') || edge.target().data('isRecommendedCategory');
-
-        // Se ambos os lados da aresta forem nós de interesse, destacamos o caminho
-        if (srcRecommended && tgtRecommended) {
-          edge.style({
-            'line-color': '#93c5fd',
-            'width': 2.5,
-            'opacity': 0.7,
-          });
-        }
-      });
     });
 
     cy.on('tap', 'node', (evt) => {
@@ -243,8 +218,7 @@ const Dashboard: React.FC = () => {
               </div>
               <h3 className="dash-card-title">Refazer Questionário</h3>
               <p className="dash-card-text">Atualize suas preferências e obtenha novas recomendações personalizadas.</p>
-              <button className="dash-btn-offwhite"
-                      onClick={() => navigate('/quiz')}>
+              <button className="dash-btn-offwhite" onClick={() => navigate('/quiz')}>
                 Começar quiz <ChevronRight size={16} />
               </button>
             </div>
@@ -255,14 +229,12 @@ const Dashboard: React.FC = () => {
               </div>
               <h3 className="dash-card-title">Explorar Cursos</h3>
               <p className="dash-card-text">Navegue por nossa biblioteca completa de cursos em tecnologia.</p>
-              <button className="dash-btn-offwhite"
-                      onClick={() => navigate('/courses')}>
+              <button className="dash-btn-offwhite" onClick={() => navigate('/courses')}>
                 Ver cursos <ChevronRight size={16} />
               </button>
             </div>
           </div>
 
-          {/* Cards de Cursos Recomendados */}
           {!isLoading && !error && graphData && graphData.recommendation?.length > 0 && (
               <div className="dash-graph-section">
                 <h3 className="dash-card-title">Recomendados para você</h3>
@@ -277,13 +249,10 @@ const Dashboard: React.FC = () => {
                             <Star size={18} color="#2563eb" />
                           </div>
                           {rec.type && (
-                              <span className="dash-rec-badge">
-                          {rec.type}
-                        </span>
+                              <span className="dash-rec-badge">{rec.type}</span>
                           )}
                         </div>
                         <h4 className="dash-rec-card-title">{rec.name ?? `Curso #${rec.id}`}</h4>
-
                         <button
                             className="dash-btn-offwhite dash-rec-btn"
                             onClick={() => navigate(`/courses/${rec.id}`)}
@@ -296,7 +265,6 @@ const Dashboard: React.FC = () => {
               </div>
           )}
 
-          {/* Mapa de Conhecimento (Grafo) */}
           <div className="dash-graph-section">
             <h3 className="dash-card-title">Seu Mapa de Conhecimento</h3>
             <p className="dash-subtitle" style={{ marginBottom: '8px' }}>
@@ -305,15 +273,15 @@ const Dashboard: React.FC = () => {
 
             <div style={{ display: 'flex', gap: '20px', marginBottom: '16px', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#555' }}>
-                <span style={{ display: 'inline-block', width: 14, height: 14, borderRadius: '50%', background: '#2563eb', border: '2px solid #1d4ed8' }} />
+                <span style={{ display: 'inline-block', width: 14, height: 14, borderRadius: '50%', background: '#ffffff', border: '2px solid #000000' }} />
                 Curso recomendado
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#555' }}>
-                <span style={{ display: 'inline-block', width: 20, height: 20, borderRadius: '50%', background: '#d97706', border: '3px solid #b45309' }} />
+                <span style={{ display: 'inline-block', width: 14, height: 14, borderRadius: '50%', background: '#000000', border: '2px solid #ffffff', outline: '1px solid #ccc' }} />
                 Categoria recomendada
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#aaa' }}>
-                <span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: '50%', background: '#cbd5e1' }} />
+                <span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: '50%', background: '#3f3f3f' }} />
                 Outros cursos
               </div>
             </div>
@@ -338,15 +306,12 @@ const Dashboard: React.FC = () => {
           <NavLink to="/dash" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
             <Home size={20}/> <span>Home</span>
           </NavLink>
-
           <NavLink to="/courses" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
             <BookOpen size={20}/> <span>Cursos</span>
           </NavLink>
-
           <NavLink to="/tutorial" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
             <FileText size={20}/> <span>Tutoriais</span>
           </NavLink>
-
           <NavLink to="/profile" className={({ isActive }) => isActive ? "dash-nav-item dash-active" : "dash-nav-item"}>
             <User size={20}/> <span>Perfil</span>
           </NavLink>

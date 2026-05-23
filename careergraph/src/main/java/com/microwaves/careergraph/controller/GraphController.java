@@ -80,4 +80,13 @@ public class GraphController {
         graphService.deleteEdge(sourceId, targetId);
         return ResponseEntity.ok(Map.of("message", "Edge deleted successfully"));
     }
+
+    @GetMapping("/coloring")
+    public ResponseEntity<String> getColoring() {
+        graphService.graphColoring();
+        graphService.prim("0");
+        graphService.verticeDegree("84");
+
+        return ResponseEntity.ok("OK");
+    }
 }

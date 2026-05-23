@@ -19,7 +19,7 @@ public class DataHandler {
     public void loadGraph(String filePath, GraphStructure graph) {
         File file = new File(filePath);
         System.out.println("DEBUG: Tentando ler o arquivo em: " + file.getAbsolutePath());
-        Map<String, Node> nodeMap = new HashMap<>(); // Auxiliary to quickly search nodes by ID
+        Map<String, Node> nodeMap = new HashMap<>();
         boolean readingEdges = false;
 
         Pattern nodePattern = Pattern.compile("^(\\d+)\\s+\"(.*)\"$");
@@ -29,27 +29,27 @@ public class DataHandler {
 
             String line;
             while ((line = br.readLine()) != null) {
-                // Remove escape characters and extra spaces
+
                 line = line.replaceAll("\\\\", "").trim();
 
                 if (line.isEmpty()) {
                     continue;
                 }
 
-                // Identifies the start of the nodes section
+
                 if (line.equals("n")) {
                     readingEdges = false;
                     continue;
                 }
 
-                // Identifies the start of the edges section
+
                 if (line.equals("m")) {
                     readingEdges = true;
                     continue;
                 }
 
                 if (!readingEdges) {
-                    // Reading Nodes
+
                     Matcher matcher = nodePattern.matcher(line);
                     if (matcher.find()) {
                         String id = matcher.group(1);
@@ -62,11 +62,11 @@ public class DataHandler {
                             node = new Course(id, name);
                         }
 
-                        nodeMap.put(id, node); // Store in quick map
-                        graph.addNode(node);   // Save in official graph structure
+                        nodeMap.put(id, node);
+                        graph.addNode(node);
                     }
                 } else {
-                    // Reading Edges
+
                     String[] parts = line.split("\\s+");
                     if (parts.length == 2) {
                         String sourceId = parts[0];
@@ -75,7 +75,7 @@ public class DataHandler {
                         Node sourceNode = nodeMap.get(sourceId);
                         Node targetNode = nodeMap.get(targetId);
 
-                        // The addEdge method in GraphModel already handles creating the bidirectional edge
+
                         if (sourceNode != null && targetNode != null) {
                             graph.addEdge(sourceNode, targetNode);
                         }
@@ -90,7 +90,7 @@ public class DataHandler {
     }
 
     public void saveGraph(String filename, GraphStructure graph) {
-        // Get all nodes from the graph and sort numerically by ID
+
         List<Node> sortedNodes = new ArrayList<>(graph.getAllNodes());
         sortedNodes.sort(Comparator.comparingInt(n -> Integer.parseInt(n.getId())));
 
@@ -100,7 +100,7 @@ public class DataHandler {
             writer.write("n");
             writer.newLine();
 
-            // Write vertices
+
             for (Node node : sortedNodes) {
                 String nodeLine = String.format("%s \"%s\"", node.getId(), node.getName());
                 writer.write(nodeLine);
@@ -110,7 +110,6 @@ public class DataHandler {
             writer.write("m");
             writer.newLine();
 
-            // Write edges
             for (Node sourceNode : sortedNodes) {
                 Set<Node> neighbors = graph.getNeighbors(sourceNode);
                 int sourceId = Integer.parseInt(sourceNode.getId());
@@ -118,8 +117,7 @@ public class DataHandler {
                 for (Node targetNode : neighbors) {
                     int targetId = Integer.parseInt(targetNode.getId());
 
-                    // Since the graph is undirected, we avoid duplicates in the file (.txt)
-                    // by writing the edge only if the source ID is less than the target ID.
+
                     if (sourceId < targetId) {
                         writer.write(sourceNode.getId() + " " + targetNode.getId());
                         writer.newLine();

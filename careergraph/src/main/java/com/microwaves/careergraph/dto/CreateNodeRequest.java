@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateNodeRequest {
     private String name;
-    private String type; // "CATEGORY" or "COURSE"
+    private String type;
 }

@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class NodeDTO {
     private String id;
     private String name;
-    private String type; // "CATEGORY" or "COURSE"
+    private String type;
 }
