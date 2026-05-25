@@ -282,7 +282,7 @@ const Dashboard: React.FC = () => {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#aaa' }}>
                 <span style={{ display: 'inline-block', width: 12, height: 12, borderRadius: '50%', background: '#3f3f3f' }} />
-                Outros cursos
+                Outros cursos/categorias
               </div>
             </div>
 

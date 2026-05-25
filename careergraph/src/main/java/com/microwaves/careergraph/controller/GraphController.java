@@ -85,7 +85,7 @@ public class GraphController {
     public ResponseEntity<String> getColoring() {
         graphService.graphColoring();
         graphService.prim("0");
-        graphService.verticeDegree("84");
+        graphService.verticeDegree("18");
 
         return ResponseEntity.ok("OK");
     }
