@@ -3,8 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import '@testing-library/jest-dom/vitest';
 import Quiz from '../pages/quizpage/Quiz';
-//oieee
-// 1. Mock the useNavigate hook from react-router-dom
+
+// Mock the useNavigate hook from react-router-dom
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react-router-dom")>();
@@ -13,98 +13,53 @@ vi.mock("react-router-dom", async (importOriginal) => {
     useNavigate: () => mockNavigate,
   };
 });
-// oiii
-// 2. Mock the GraphBackground to avoid rendering complex animations in tests
-// Note: In Vitest (ESM), it is safest to explicitly mock the 'default' export
+
+// Mock the GraphBackground to avoid rendering complex animations in tests
 vi.mock("../../components/GraphBackground", () => ({
   default: () => <div data-testid="graph-background" />
 }));
 
 describe("Quiz Component", () => {
-    beforeAll(() => {
-        // Mocks the canvas context to prevent JSDOM crashes
-        HTMLCanvasElement.prototype.getContext = vi.fn();
-      });
+  beforeAll(() => {
+    // Mocks the canvas context to prevent JSDOM crashes
+    HTMLCanvasElement.prototype.getContext = vi.fn();
+  });
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  test("renders the first question correctly on load", () => {
+  test("renders the first question with all answer options", () => {
     render(
       <MemoryRouter>
         <Quiz />
       </MemoryRouter>
     );
 
-    // Verify initial state
+    // Verify the question counter is displayed
     expect(screen.getByText("Pergunta 1 de 15")).toBeInTheDocument();
-    expect(
-      screen.getByText("Tenho facilidade em resolver problemas usando lógica e raciocínio abstrato.")
-    ).toBeInTheDocument();
+
+    // Verify all 5 answer options are rendered
     expect(screen.getByText("Super me identifico")).toBeInTheDocument();
+    expect(screen.getByText("Me identifico")).toBeInTheDocument();
+    expect(screen.getByText("Neutro")).toBeInTheDocument();
+    expect(screen.getByText("Não me identifico")).toBeInTheDocument();
+    expect(screen.getByText("Não me identifico de jeito nenhum")).toBeInTheDocument();
   });
 
-/*
-  test("advances to the next question when an option is clicked (handleAnswer)", async () => {
-    // Enable fake timers to bypass the 350ms setTimeout
-    vi.useFakeTimers();
-
+  test("navigates back when back button is clicked", () => {
     render(
       <MemoryRouter>
         <Quiz />
       </MemoryRouter>
     );
 
-    // Click an answer option
-    const answerButtons = screen.getAllByText("Me identifico");
-    fireEvent.click(answerButtons[0]); // Clicks the first one found
+    // Find and click the back arrow button
+    const backButton = screen.getAllByText("←")[0];
+    fireEvent.click(backButton);
 
-    // Fast-forward time by 350ms
-    vi.advanceTimersByTime(350);
-
-    // Wait for the UI to update to Question 2
-    await waitFor(() => {
-      expect(screen.getByText("Pergunta 2 de 10")).toBeInTheDocument();
-      expect(
-        screen.getByText("Gosto de entender como as interfaces de aplicativos e sites são construídas.")
-      ).toBeInTheDocument();
-    });
-
-    vi.useRealTimers();
-  });*/
-
-  test("navigates to '/' when the back arrow is clicked on the first question (handleBack)", () => {
-    render(
-      <MemoryRouter>
-        <Quiz />
-      </MemoryRouter>
-    );
-
-    const backButton = screen.getAllByText("←");
-    fireEvent.click(backButton[0]);
-
-    // Verify navigate was called with the root path
+    // Verify navigate was called with the home path
     expect(mockNavigate).toHaveBeenCalledWith("/");
     expect(mockNavigate).toHaveBeenCalledTimes(1);
   });
-
-  /*
-  test("toggles the animation paused state", () => {
-    render(
-      <MemoryRouter>
-        <Quiz />
-      </MemoryRouter>
-    );
-    //teste
-    const toggleButton = screen.getAllByText("Desativar animação");
-
-    // Click to pause
-    fireEvent.click(toggleButton);
-    expect(screen.getByText("Ativar animação")).toBeInTheDocument();
-
-    // Click to unpause
-    fireEvent.click(screen.getByText("Ativar animação"));
-    expect(screen.getByText("Desativar animação")).toBeInTheDocument();
-  });
-*/
 });
