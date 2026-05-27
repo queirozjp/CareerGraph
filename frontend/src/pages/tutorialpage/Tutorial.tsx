@@ -1,6 +1,6 @@
 import React from "react";
 import "./Tutorial.css";
-import { Home, BookOpen, FileText, User, Bookmark, ExternalLink, Youtube, Award, GraduationCap, Briefcase } from "lucide-react";
+import { Home, BookOpen, FileText, User, Youtube, GraduationCap, Briefcase } from "lucide-react";
 import { NavLink } from 'react-router-dom';
 
 const Tutorial: React.FC = () => {

@@ -47,7 +47,7 @@ export default function Result() {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', gap: '12px', color: '#666' }}>
           <Loader2 size={32} className="animate-spin" color="#2563eb" />
-          <p style={{ fontVeriant: 'Inter', fontWeight: 500 }}>Sincronizando suas respostas...</p>
+          <p style={{ fontFamily: 'Inter', fontWeight: 500 }}>Sincronizando suas respostas...</p>
         </div>
     );
   }

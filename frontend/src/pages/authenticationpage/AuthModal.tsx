@@ -8,7 +8,7 @@ type AuthModalProps = {
   onSuccess: () => void;
 };
 
-export default function AuthModal({ mode, onClose, onSwitchMode, onSuccess }: AuthModalProps) {
+export default function AuthModal({ mode, onClose, onSuccess }: AuthModalProps) {
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
   const [name, setName]         = useState("");

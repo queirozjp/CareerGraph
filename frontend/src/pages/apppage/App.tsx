@@ -8,7 +8,7 @@ import CourseDetails from "../coursespage/CourseDetails"; // <-- IMPORTAR A NOVA
 import Tutorial from "../tutorialpage/Tutorial";
 import Profile from "../profilepage/Profile";
 
-const PrivateRoutes = ({children}) => {
+const PrivateRoutes = ({children}: {children: React.ReactNode}) => {
   const token = localStorage.getItem("token");
   if(!token){
     return <Navigate to="/" replace />
