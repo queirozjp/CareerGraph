@@ -40,11 +40,11 @@ describe("Quiz Component", () => {
     expect(screen.getByText("Pergunta 1 de 15")).toBeInTheDocument();
 
     // Verify all 5 answer options are rendered
-    expect(screen.getByText("Super me identifico")).toBeInTheDocument();
-    expect(screen.getByText("Me identifico")).toBeInTheDocument();
-    expect(screen.getByText("Neutro")).toBeInTheDocument();
     expect(screen.getByText("Não me identifico")).toBeInTheDocument();
-    expect(screen.getByText("Não me identifico de jeito nenhum")).toBeInTheDocument();
+    expect(screen.getByText("Pouco me identifico")).toBeInTheDocument();
+    expect(screen.getByText("Parcialmente me identifico")).toBeInTheDocument();
+    expect(screen.getByText("Me identifico")).toBeInTheDocument();
+    expect(screen.getByText("Super me identifico")).toBeInTheDocument();
   });
 
   test("navigates back when back button is clicked", () => {
