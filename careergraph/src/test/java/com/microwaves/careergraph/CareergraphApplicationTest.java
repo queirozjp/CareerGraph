@@ -11,5 +11,5 @@ class CareergraphApplicationTest {
 	void contextLoads() {
 		assertTrue(true, "The application context should load successfully");
 	}
-
+	// buffer
 }
