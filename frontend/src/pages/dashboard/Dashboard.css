@@ -181,38 +181,58 @@
   .dash-cy-container { height: 400px; }
 }
 
-/* ─── Cards de Recomendação ─────────────────────────────────────── */
+/* ─── Cards de Recomendação (Lista) ─────────────────────────────── */
 
-.dash-recommendations-scroll {
+.dash-recommendations-list {
   display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scrollbar-width: none;
+  flex-direction: column;
+  gap: 12px;
 }
-.dash-recommendations-scroll::-webkit-scrollbar { display: none; }
 
-.dash-rec-card {
-  flex: 0 0 200px;
+.dash-rec-list-card {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
   padding: 16px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   transition: box-shadow 0.2s, transform 0.2s;
+  gap: 16px;
 }
-.dash-rec-card:hover {
+
+.dash-rec-list-card:hover {
   box-shadow: 0 4px 16px rgba(37,99,235,0.12);
   transform: translateY(-2px);
 }
 
-.dash-rec-card-header {
+.dash-rec-top {
+  border: 2px solid #fbbf24;
+  background: #fffbeb;
+}
+
+.dash-rec-top:hover {
+  box-shadow: 0 4px 16px rgba(217, 119, 6, 0.15);
+}
+
+.dash-rec-list-left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
+  flex: 1;
+}
+
+.dash-rec-list-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dash-rec-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .dash-rec-badge {
@@ -225,30 +245,37 @@
   border: 1px solid #bfdbfe;
   border-radius: 999px;
   padding: 2px 8px;
+  white-space: nowrap;
 }
 
-.dash-rec-card-title {
-  font-size: 14px;
+.dash-badge-top {
+  background: #fef3c7;
+  color: #d97706;
+  border-color: #fde68a;
+}
+
+.dash-rec-list-title {
+  font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
   line-height: 1.4;
-  flex: 1;
   margin: 0;
 }
 
-.dash-rec-btn {
+.dash-rec-list-btn {
   font-size: 13px;
-  padding: 6px 12px;
-  margin-top: auto;
-  width: 100%;
+  padding: 8px 16px;
+  width: auto;
   justify-content: center;
+  white-space: nowrap;
 }
 
-@media (min-width: 640px) {
-  .dash-recommendations-scroll {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    overflow-x: visible;
+@media (max-width: 600px) {
+  .dash-rec-list-card {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  .dash-rec-card { flex: unset; }
+  .dash-rec-list-btn {
+    width: 100%;
+  }
 }

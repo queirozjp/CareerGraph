@@ -241,26 +241,32 @@ const Dashboard: React.FC = () => {
                 <p className="dash-subtitle" style={{ marginBottom: '16px' }}>
                   Com base no seu perfil, separamos esses cursos para você começar.
                 </p>
-                <div className="dash-recommendations-scroll">
-                  {graphData.recommendation.map((rec) => (
-                      <div key={rec.id} className="dash-rec-card">
-                        <div className="dash-rec-card-header">
-                          <div className="dash-icon-box dash-blue" style={{ marginBottom: 0 }}>
-                            <Star size={18} color="#2563eb" />
+                <div className="dash-recommendations-list">
+                  {graphData.recommendation.map((rec, index) => {
+                    const isTop = index === 0;
+                    return (
+                        <div key={rec.id} className={`dash-rec-list-card ${isTop ? 'dash-rec-top' : ''}`}>
+                          <div className="dash-rec-list-left">
+                            <div className={`dash-icon-box ${isTop ? 'dash-yellow' : 'dash-blue'}`} style={{ marginBottom: 0 }}>
+                              <Star size={20} color={isTop ? "#d97706" : "#2563eb"} />
+                            </div>
+                            <div className="dash-rec-list-info">
+                              <div className="dash-rec-badges">
+                                {isTop && <span className="dash-rec-badge dash-badge-top">Top Recomendação</span>}
+                                {rec.type && <span className="dash-rec-badge">{rec.type}</span>}
+                              </div>
+                              <h4 className="dash-rec-list-title">{rec.name ?? `Curso #${rec.id}`}</h4>
+                            </div>
                           </div>
-                          {rec.type && (
-                              <span className="dash-rec-badge">{rec.type}</span>
-                          )}
+                          <button
+                              className="dash-btn-offwhite dash-rec-list-btn"
+                              onClick={() => navigate(`/courses/${rec.id}`)}
+                          >
+                            Ver curso <ChevronRight size={14} />
+                          </button>
                         </div>
-                        <h4 className="dash-rec-card-title">{rec.name ?? `Curso #${rec.id}`}</h4>
-                        <button
-                            className="dash-btn-offwhite dash-rec-btn"
-                            onClick={() => navigate(`/courses/${rec.id}`)}
-                        >
-                          Ver curso <ChevronRight size={14} />
-                        </button>
-                      </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
           )}
